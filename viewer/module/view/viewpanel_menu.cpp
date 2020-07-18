@@ -14,7 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "viewpanel.h"
+#include <DMenu>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QKeySequence>
+#include <QShortcut>
+#include <QStyleFactory>
 #include "application.h"
 #include "contents/imageinfowidget.h"
 #include "controller/configsetter.h"
@@ -23,17 +28,8 @@
 #include "scen/imageview.h"
 #include "utils/baseutils.h"
 #include "utils/imageutils.h"
-#include "widgets/dialogs/filedeletedialog.h"
+#include "viewpanel.h"
 #include "widgets/printhelper.h"
-#include <QMenu>
-#include <QKeySequence>
-#include <QJsonArray>
-#include <QJsonDocument>
-#include <QShortcut>
-#include <QStyleFactory>
-
-#include <QtPrintSupport/QPrinter>
-#include <QtPrintSupport/QPrintDialog>
 
 namespace {
 
@@ -74,38 +70,39 @@ enum MenuItemId {
 
 void ViewPanel::initPopupMenu()
 {
-    m_menu = new QMenu;
-    m_menu->setStyle(QStyleFactory::create("dlight"));
-    connect(this, &ViewPanel::customContextMenuRequested, this, [=] {
-        if (! m_infos.isEmpty()
-        #ifdef LITE_DIV
-                && !m_current->filePath.isEmpty()
-        #endif
-                ) {
+    m_menu = new DMenu;
+    connect(this, &ViewPanel::customContextMenuRequested, this, [ = ] {
+        if (m_infos.isEmpty())
+            return;
+        QString filePath = m_infos.at(m_current).filePath;
+#ifdef LITE_DIV
+        if (!filePath.isEmpty() && QFileInfo(filePath).exists()
+#endif
+           )
+        {
             updateMenuContent();
             dApp->setOverrideCursor(Qt::ArrowCursor);
             m_menu->popup(QCursor::pos());
         }
     });
-    connect(m_menu, &QMenu::aboutToHide, this, [=] {
-        dApp->restoreOverrideCursor();
-    });
-    connect(m_menu, &QMenu::triggered, this, &ViewPanel::onMenuItemClicked);
-    connect(dApp->setter, &ConfigSetter::valueChanged, this, [=] {
-        if (this && this->isVisible()) {
+    connect(m_menu, &DMenu::aboutToHide, this, [ = ] { dApp->restoreOverrideCursor(); });
+    connect(m_menu, &DMenu::triggered, this, &ViewPanel::onMenuItemClicked);
+    connect(dApp->setter, &ConfigSetter::valueChanged, this, [ = ] {
+        if (this && this->isVisible())
+        {
             updateMenuContent();
         }
     });
-    QShortcut* sc = new QShortcut(QKeySequence("Alt+Return"), this);
-    sc->setContext(Qt::WindowShortcut);
-    connect(sc, &QShortcut::activated, this, [=] {
-        if (m_isInfoShowed)
-            emit dApp->signalM->hideExtensionPanel();
-        else
-            emit dApp->signalM->showExtensionPanel();
-        // Update panel info
-        m_info->setImagePath(m_current->filePath);
-    });
+    //    QShortcut *sc = new QShortcut(QKeySequence("Alt+Enter"), this);
+    //    sc->setContext(Qt::WidgetWithChildrenShortcut);
+    //    connect(sc, &QShortcut::activated, this, [ = ] {
+    //        if (m_isInfoShowed)
+    //            emit dApp->signalM->hideExtensionPanel();
+    //        else
+    //            emit dApp->signalM->showExtensionPanel();
+    //        // Update panel info
+    //        m_info->setImagePath(m_infos.at(m_current).filePath);
+    //    });
 }
 
 void ViewPanel::appendAction(int id, const QString &text, const QString &shortcut)
@@ -119,14 +116,13 @@ void ViewPanel::appendAction(int id, const QString &text, const QString &shortcu
 }
 
 #ifndef LITE_DIV
-QMenu *ViewPanel::createAlbumMenu()
+DMenu *ViewPanel::createAlbumMenu()
 {
-    if (m_infos.isEmpty() || m_current == m_infos.constEnd() || ! m_vinfo.inDatabase) {
+    if (m_infos.isEmpty() || m_current == m_infos.constEnd() || !m_vinfo.inDatabase) {
         return nullptr;
     }
 
-    QMenu *am = new QMenu(tr("Add to album"));
-    am->setStyle(QStyleFactory::create("dlight"));
+    DMenu *am = new DMenu(tr("Add to album"));
     QStringList albums = DBManager::instance()->getAllAlbumNames();
     albums.removeAll(FAVORITES_ALBUM_NAME);
 
@@ -138,10 +134,11 @@ QMenu *ViewPanel::createAlbumMenu()
     am->addSeparator();
     for (QString album : albums) {
         const QStringList paths = DBManager::instance()->getPathsByAlbum(album);
-        if (! paths.contains(m_current->filePath)) {
+        if (!paths.contains(m_current->filePath)) {
             QAction *ac = new QAction(am);
             ac->setProperty("MenuID", IdAddToAlbum);
-            ac->setText(fontMetrics().elidedText(QString(album).replace("&", "&&"), Qt::ElideMiddle, 200));
+            ac->setText(
+                fontMetrics().elidedText(QString(album).replace("&", "&&"), Qt::ElideMiddle, 200));
             ac->setData(album);
             am->addAction(ac);
         }
@@ -156,7 +153,9 @@ void ViewPanel::onMenuItemClicked(QAction *action)
     using namespace utils::base;
     using namespace utils::image;
 
-    const QString path = m_current->filePath;
+    if (m_infos.isEmpty())
+        return;
+    const QString path = m_infos.at(m_current).filePath;
     const int id = action->property("MenuID").toInt();
 
     switch (MenuItemId(id)) {
@@ -192,11 +191,16 @@ void ViewPanel::onMenuItemClicked(QAction *action)
         copyImageToClipboard(QStringList(path));
         break;
     case IdMoveToTrash:
+        //右键菜单删除action和delete快捷键删除图片
         if (m_vinfo.inDatabase) {
             popupDelDialog(path);
         } else {
+            QFile file(path);
+            if (!file.exists())
+                break;
             removeCurrentImage();
-            utils::base::trashFile(path);
+            DDesktopServices::trash(path);
+            emit dApp->signalM->picDelete();
         }
         break;
 #ifndef LITE_DIV
@@ -231,12 +235,13 @@ void ViewPanel::onMenuItemClicked(QAction *action)
         emit dApp->signalM->showInFileManager(path);
         break;
     case IdImageInfo:
-        if (m_isInfoShowed)
+        if (m_isInfoShowed) {
             emit dApp->signalM->hideExtensionPanel();
-        else
+        } else {
             emit dApp->signalM->showExtensionPanel();
-        // Update panel info
-        m_info->setImagePath(path);
+            // Update panel info
+            m_info->setImagePath(path);
+        }
         break;
     default:
         break;
@@ -256,8 +261,7 @@ void ViewPanel::updateMenuContent()
 
     if (window()->isFullScreen()) {
         appendAction(IdExitFullScreen, tr("Exit fullscreen"), ss("Fullscreen", "F11"));
-    }
-    else {
+    } else {
         appendAction(IdFullScreen, tr("Fullscreen"), ss("Fullscreen", "F11"));
     }
 #ifndef LITE_DIV
@@ -266,7 +270,7 @@ void ViewPanel::updateMenuContent()
     appendAction(IdPrint, tr("Print"), ss("Print", "Ctrl+P"));
 #ifndef LITE_DIV
     if (m_vinfo.inDatabase) {
-        QMenu *am = createAlbumMenu();
+        DMenu *am = createAlbumMenu();
         if (am) {
             m_menu->addMenu(am);
         }
@@ -275,73 +279,84 @@ void ViewPanel::updateMenuContent()
     m_menu->addSeparator();
     /**************************************************************************/
     appendAction(IdCopy, tr("Copy"), ss("Copy", "Ctrl+C"));
-    appendAction(IdMoveToTrash, tr("Delete"), ss("Throw to trash", "Delete"));
+    if (QFileInfo(m_infos.at(m_current).filePath).isReadable() &&
+            QFileInfo(m_infos.at(m_current).filePath).isWritable()) {
+        appendAction(IdMoveToTrash, tr("Delete"), ss("Throw to trash", "Delete"));
+    }
 
 #ifndef LITE_DIV
-    if (! m_vinfo.album.isEmpty()) {
-        appendAction(IdRemoveFromAlbum,
-                     tr("Remove from album"), ss("Remove from album"));
+    if (!m_vinfo.album.isEmpty()) {
+        appendAction(IdRemoveFromAlbum, tr("Remove from album"), ss("Remove from album"));
     }
     m_menu->addSeparator();
     /**************************************************************************/
     if (m_vinfo.inDatabase) {
         if (m_current != m_infos.constEnd() &&
-                ! DBManager::instance()->isImgExistInAlbum(FAVORITES_ALBUM_NAME,
-                                               m_current->filePath)) {
-            appendAction(IdAddToFavorites,
-                         tr("Favorite"), ss("Favorite"));
+                !DBManager::instance()->isImgExistInAlbum(FAVORITES_ALBUM_NAME, m_current->filePath)) {
+            appendAction(IdAddToFavorites, tr("Favorite"), ss("Favorite"));
         } else {
-            appendAction(IdRemoveFromFavorites,
-                         tr("Unfavorite"),
-                         ss("Unfavorite"));
+            appendAction(IdRemoveFromFavorites, tr("Unfavorite"), ss("Unfavorite"));
         }
     }
 #endif
     m_menu->addSeparator();
     /**************************************************************************/
-    if (! m_viewB->isWholeImageVisible() && m_nav->isAlwaysHidden()) {
-        appendAction(IdShowNavigationWindow,
-                     tr("Show navigation window"), ss("Show navigation window", ""));
-    }
-    else if (! m_viewB->isWholeImageVisible() && !m_nav->isAlwaysHidden()) {
-        appendAction(IdHideNavigationWindow,
-                     tr("Hide navigation window"), ss("Hide navigation window", ""));
+    if (!m_viewB->isWholeImageVisible() && m_nav->isAlwaysHidden()) {
+        appendAction(IdShowNavigationWindow, tr("Show navigation window"),
+                     ss("Show navigation window", ""));
+    } else if (!m_viewB->isWholeImageVisible() && !m_nav->isAlwaysHidden()) {
+        appendAction(IdHideNavigationWindow, tr("Hide navigation window"),
+                     ss("Hide navigation window", ""));
     }
     /**************************************************************************/
-    if (utils::image::imageSupportSave(m_current->filePath)) {
+    if (QFileInfo(m_infos.at(m_current).filePath).isReadable() &&
+            QFileInfo(m_infos.at(m_current).filePath).isWritable() &&
+            utils::image::imageSupportSave(m_infos.at(m_current).filePath)) {
         m_menu->addSeparator();
-        appendAction(IdRotateClockwise,
-                     tr("Rotate clockwise"), ss("Rotate clockwise", "Ctrl+R"));
-        appendAction(IdRotateCounterclockwise,
-                     tr("Rotate counterclockwise"), ss("Rotate counterclockwise", "Ctrl+Shift+R"));
+        appendAction(IdRotateClockwise, tr("Rotate clockwise"), ss("Rotate clockwise", "Ctrl+R"));
+        appendAction(IdRotateCounterclockwise, tr("Rotate counterclockwise"),
+                     ss("Rotate counterclockwise", "Ctrl+Shift+R"));
     }
     /**************************************************************************/
-    if (utils::image::imageSupportSave(m_current->filePath))  {
-        appendAction(IdSetAsWallpaper,
-                     tr("Set as wallpaper"), ss("Set as wallpaper", "Ctrl+F8"));
+    if (utils::image::imageSupportSave(m_infos.at(m_current).filePath)) {
+        appendAction(IdSetAsWallpaper, tr("Set as wallpaper"), ss("Set as wallpaper", "Ctrl+F9"));
     }
 #ifndef LITE_DIV
     if (m_vinfo.inDatabase)
 #endif
     {
-        appendAction(IdDisplayInFileManager,
-                     tr("Display in file manager"), ss("Display in file manager", "Ctrl+D"));
+        appendAction(IdDisplayInFileManager, tr("Display in file manager"),
+                     ss("Display in file manager", "Ctrl+D"));
     }
-    appendAction(IdImageInfo, tr("Image info"), ss("Image info", "Alt+Enter"));
+    appendAction(IdImageInfo, tr("Image info"), ss("Image info", "Alt+Return"));
 }
 
 void ViewPanel::initShortcut()
 {
+    QShortcut *sc = nullptr;
+    // slove Alt+Enter shortcut
+    sc = new QShortcut(QKeySequence("Alt+Enter"), this);
+    sc->setContext(Qt::WindowShortcut);
+    connect(sc, &QShortcut::activated, this, [ = ] {
+        if (m_isInfoShowed)
+        {
+            emit dApp->signalM->hideExtensionPanel();
+        } else
+        {
+            emit dApp->signalM->showExtensionPanel();
+        }
+    });
     // Delay image toggle
     QTimer *dt = new QTimer(this);
     dt->setSingleShot(true);
     dt->setInterval(SWITCH_IMAGE_DELAY);
-    QShortcut *sc = nullptr;
+
     // Previous
     sc = new QShortcut(QKeySequence(Qt::Key_Left), this);
     sc->setContext(Qt::WindowShortcut);
-    connect(sc, &QShortcut::activated, this, [=] {
-        if (! dt->isActive()) {
+    connect(sc, &QShortcut::activated, this, [ = ] {
+        if (!dt->isActive())
+        {
             dt->start();
             showPrevious();
         }
@@ -349,8 +364,9 @@ void ViewPanel::initShortcut()
     // Next
     sc = new QShortcut(QKeySequence(Qt::Key_Right), this);
     sc->setContext(Qt::WindowShortcut);
-    connect(sc, &QShortcut::activated, this, [=] {
-        if (! dt->isActive()) {
+    connect(sc, &QShortcut::activated, this, [ = ] {
+        if (!dt->isActive())
+        {
             dt->start();
             showNext();
         }
@@ -359,53 +375,64 @@ void ViewPanel::initShortcut()
     // Zoom out (Ctrl++ Not working, This is a confirmed bug in Qt 5.5.0)
     sc = new QShortcut(QKeySequence(Qt::Key_Up), this);
     sc->setContext(Qt::WindowShortcut);
-    connect(sc, &QShortcut::activated, this, [=] {
+    connect(sc, &QShortcut::activated, this, [ = ] {
         qDebug() << "Qt::Key_Up:";
         m_viewB->setScaleValue(1.1);
     });
+    sc = new QShortcut(QKeySequence("Ctrl++"), this);
+    sc->setContext(Qt::WindowShortcut);
+    connect(sc, &QShortcut::activated, this, [ = ] {
+        if (QFile(m_viewB->path()).exists())
+            m_viewB->setScaleValue(1.1);
+    });
     sc = new QShortcut(QKeySequence("Ctrl+="), this);
     sc->setContext(Qt::WindowShortcut);
-    connect(sc, &QShortcut::activated, this, [=] {
-        m_viewB->setScaleValue(1.1);
+    connect(sc, &QShortcut::activated, this, [ = ] {
+        if (QFile(m_viewB->path()).exists())
+            m_viewB->setScaleValue(1.1);
     });
     // Zoom in
     sc = new QShortcut(QKeySequence(Qt::Key_Down), this);
     sc->setContext(Qt::WindowShortcut);
-    connect(sc, &QShortcut::activated, this, [=] {
+    connect(sc, &QShortcut::activated, this, [ = ] {
         qDebug() << "Qt::Key_Down:";
-        m_viewB->setScaleValue(0.9);
+        if (QFile(m_viewB->path()).exists())
+            m_viewB->setScaleValue(0.9);
     });
     sc = new QShortcut(QKeySequence("Ctrl+-"), this);
     sc->setContext(Qt::WindowShortcut);
-    connect(sc, &QShortcut::activated, this, [=] {
-        m_viewB->setScaleValue(0.9);
+    connect(sc, &QShortcut::activated, this, [ = ] {
+        if (QFile(m_viewB->path()).exists())
+            m_viewB->setScaleValue(0.9);
     });
     // Esc
     QShortcut *esc = new QShortcut(QKeySequence(Qt::Key_Escape), this);
     esc->setContext(Qt::WindowShortcut);
-    connect(esc, &QShortcut::activated, this, [=] {
-        if (window()->isFullScreen()) {
+    connect(esc, &QShortcut::activated, this, [ = ] {
+        if (window()->isFullScreen())
+        {
             toggleFullScreen();
-        }
-        else {
+        } else
+        {
             if (m_vinfo.inDatabase) {
                 backToLastPanel();
-            }
-            else {
+            } else {
                 dApp->quit();
             }
         }
         emit dApp->signalM->hideExtensionPanel(true);
     });
-    //1:1 size
+    // 1:1 size
     QShortcut *adaptImage = new QShortcut(QKeySequence("Ctrl+0"), this);
     adaptImage->setContext(Qt::WindowShortcut);
-    connect(adaptImage, &QShortcut::activated, this, [=]{
-        m_viewB->fitImage();
+    connect(adaptImage, &QShortcut::activated, this, [ = ] {
+        if (QFile(m_viewB->path()).exists())
+            m_viewB->fitImage();
     });
 }
 
-void ViewPanel::popupDelDialog(const QString path) {
+void ViewPanel::popupDelDialog(const QString path)
+{
 #ifndef LITE_DIV
     const QStringList paths(path);
     FileDeleteDialog *fdd = new FileDeleteDialog(paths);

@@ -15,93 +15,121 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include "extensionpanel.h"
+#include <QPainter>
 #include "application.h"
 #include "controller/signalmanager.h"
 #include "darrowbutton.h"
-#include <QPainter>
+#include <DFontSizeManager>
 
 using namespace Dtk::Widget;
 
 namespace {
 
-//const int CONTROL_BUTTON_WIDTH = 20;
-//const int CONTROL_BUTTON_HEIGHT = 60;
-//const int CONTROL_BUTTON_CUBIC_LENGTH = 30;
-const int EXTENSION_PANEL_WIDTH = 240;
-const int EXTENSION_PANEL_MAX_WIDTH = 340;
+// const int CONTROL_BUTTON_WIDTH = 20;
+// const int CONTROL_BUTTON_HEIGHT = 60;
+// const int CONTROL_BUTTON_CUBIC_LENGTH = 30;
+const int EXTENSION_PANEL_WIDTH = 300 + 20;
+// const int EXTENSION_PANEL_MAX_WIDTH = 340;
 
 const QColor DARK_COVERBRUSH = QColor(0, 0, 0, 100);
 const QColor LIGHT_COVERBRUSH = QColor(255, 255, 255, 179);
+const int ANIMATION_DURATION = 500;
+const QEasingCurve ANIMATION_EASING_CURVE = QEasingCurve::InOutCubic;
 }  // namespace
 
 ExtensionPanel::ExtensionPanel(QWidget *parent)
-    : BlurFrame(parent)
+//    : DFloatingWidget(parent)
+    : DAbstractDialog(parent)
 {
-    onThemeChanged(dApp->viewerTheme->getCurrentTheme());
-    setBorderColor(QColor(255, 255, 255, 51));
-//    setMaximumWidth(EXTENSION_PANEL_MAX_WIDTH);
+    init();
+    //    onThemeChanged(dApp->viewerTheme->getCurrentTheme());
+    this->setWindowTitle(tr("Image info"));
+    DFontSizeManager::instance()->bind(this, DFontSizeManager::T6, QFont::Medium);
+
+//    m_contentLayout = new QVBoxLayout(this);
+//    m_contentLayout->setContentsMargins(0, 0, 0, 0);
+//    m_contentLayout->setSpacing(0);
+
+//    this->setModal(true);
+
     setFixedWidth(EXTENSION_PANEL_WIDTH);
-    m_contentLayout = new QHBoxLayout(this);
-    m_contentLayout->setContentsMargins(0, 0, 0, 0);
-    m_contentLayout->setSpacing(0);
-
-    connect(dApp->viewerTheme, &ViewerThemeManager::viewerThemeChanged, this,
-            &ExtensionPanel::onThemeChanged);
-//    DArrowButton *hideButton = new DArrowButton();
-//    hideButton->setFixedSize(CONTROL_BUTTON_WIDTH, CONTROL_BUTTON_WIDTH);
-//    hideButton->setArrowDirection(DArrowButton::ArrowLeft);
-//    connect(hideButton, &DArrowButton::mouseRelease, [=] {
-//        emit dApp->signalM->hideExtensionPanel();
-//    });
-
-//    QHBoxLayout *mainLayout = new QHBoxLayout(this);
-//    mainLayout->setContentsMargins(0, 0, 0, 0);
-//    mainLayout->setSpacing(0);
-
-//    mainLayout->addLayout(m_contentLayout);
-//    mainLayout->addWidget(hideButton);
-//    mainLayout->addSpacing(5);
-}
-
-void ExtensionPanel::onThemeChanged(ViewerThemeManager::AppTheme theme) {
-    if (theme == ViewerThemeManager::Dark) {
-        m_coverBrush = DARK_COVERBRUSH;
-    } else {
-        m_coverBrush = LIGHT_COVERBRUSH;
-    }
-    setCoverBrush(m_coverBrush);
+    setFixedHeight(400);
 }
 
 void ExtensionPanel::setContent(QWidget *content)
 {
     if (content) {
+#if 1
+//        QLayoutItem *child;
+//        if ((child = m_contentLayout->takeAt(0)) != 0) {
+//            if (child->widget())
+//                child->widget()->deleteLater();
+//            delete child;
+//        }
+#else
         QLayoutItem *child;
-        if ((child = m_contentLayout->takeAt(0)) != 0) {
+        if ((child = m_contentLayout->takeAt(0)) != nullptr) {
             if (child->widget())
-                child->widget()->deleteLater();
-            delete child;
+                child->widget()->setParent(nullptr);
         }
-
+        delete child;
+#endif
         m_content = content;
         updateRectWithContent();
-        m_contentLayout->addWidget(content);
+
+        QVBoxLayout *layout = qobject_cast<QVBoxLayout *>(m_scrollArea->widget()->layout());
+        if (nullptr != layout)
+            layout->addWidget(content);
+//        this->addContent(content);
     }
 }
 
 void ExtensionPanel::updateRectWithContent()
 {
+    connect(dApp->signalM, &SignalManager::extensionPanelHeight, this,
+    [ = ](int height) {
+        setFixedHeight(qMin(540, height)); //tmp for imageinfo
+    });
+
     if (m_content) {
-        resize(qMax(m_content->sizeHint().width(), EXTENSION_PANEL_WIDTH),
-               height());
+//                resize(qMax(m_content->sizeHint().width(), EXTENSION_PANEL_WIDTH), height());
     }
 }
 
 void ExtensionPanel::mouseMoveEvent(QMouseEvent *e)
 {
-    Q_UNUSED(e);
+//    Q_UNUSED(e);
+    DAbstractDialog::mouseMoveEvent(e);
 }
 
-//void ExtensionPanel::paintEvent(QPaintEvent *)
+void ExtensionPanel::closeEvent(QCloseEvent *e)
+{
+    emit dApp->signalM->hideExtensionPanel();
+    DAbstractDialog::closeEvent(e);
+}
+
+void ExtensionPanel::paintEvent(QPaintEvent *pe)
+{
+    //    QPainter painter(this);
+    //    painter.setRenderHint(QPainter::Antialiasing);
+    //    QRectF bgRect;
+    //    bgRect.setSize(size());
+    //    const QPalette pal = QGuiApplication::palette();//this->palette();
+    //    QColor bgColor = pal.color(QPalette::ToolTipBase);
+
+    //    QPainterPath pp;
+    //    pp.addRoundedRect(bgRect, 18, 18);
+    //    painter.fillPath(pp, QColor(0,0,0,22));
+
+    //    {
+    //        auto view_rect = bgRect.marginsRemoved(QMargins(1, 1, 1, 1));
+    //        QPainterPath pp;
+    //        pp.addRoundedRect(view_rect, 18, 18);
+    //        painter.fillPath(pp, bgColor);
+    //    }
+    //    QWidget::paintEvent(pe);
+    DAbstractDialog::paintEvent(pe);
+}
 //{
 //    QPainter painter(this);
 //    QPainterPath path;
@@ -143,3 +171,76 @@ void ExtensionPanel::mouseMoveEvent(QMouseEvent *e)
 //    painter.drawPath(path);
 //    painter.end();
 //}
+void ExtensionPanel::moveWithAnimation(int x, int y)
+{
+    //    QPropertyAnimation *animation = new QPropertyAnimation(this, "pos");
+    //    animation->setDuration(ANIMATION_DURATION);
+    //    animation->setEasingCurve(ANIMATION_EASING_CURVE);
+    //    animation->setStartValue(pos());
+    //    animation->setEndValue(QPoint(x, y));
+    //    animation->start();
+    //    connect(this, &ExtensionPanel::requestStopAnimation, animation,
+    //    &QPropertyAnimation::stop); connect(this, &ExtensionPanel::requestStopAnimation,
+    //    animation,
+    //            &QPropertyAnimation::deleteLater);
+    //    connect(animation, &QPropertyAnimation::finished, animation,
+    //    &QPropertyAnimation::deleteLater);
+}
+
+void ExtensionPanel::init()
+{
+    m_mainLayout = new QVBoxLayout;
+
+    m_titleBar = new DTitlebar();
+    m_titleBar->setMenuVisible(false);
+    m_titleBar->setBackgroundTransparent(true);
+    m_titleBar->setTitle(this->windowTitle());
+    QObject::connect(this, &ExtensionPanel::windowTitleChanged, m_titleBar, &DTitlebar::setTitle);
+
+    m_scrollArea = new QScrollArea;
+    m_scrollArea->setMinimumHeight(40);
+    QPalette palette = m_scrollArea->viewport()->palette();
+    palette.setBrush(QPalette::Background, Qt::NoBrush);
+    m_scrollArea->viewport()->setPalette(palette);
+    m_scrollArea->setFrameShape(QFrame::Shape::NoFrame);
+
+    QWidget *scrollContentWidget = new QWidget(m_scrollArea);
+    QVBoxLayout *scrollWidgetLayout = new QVBoxLayout;
+    scrollWidgetLayout->setContentsMargins(10, 0, 10, 10);
+    scrollWidgetLayout->setSpacing(0);
+    scrollContentWidget->setLayout(scrollWidgetLayout);
+    m_scrollArea->setWidget(scrollContentWidget);
+    m_scrollArea->setWidgetResizable(true);
+    m_scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
+
+    m_mainLayout->setSpacing(10);
+    m_mainLayout->setContentsMargins(QMargins(0, 0, 0, 0));
+    m_mainLayout->addWidget(m_titleBar);
+    m_mainLayout->addWidget(m_scrollArea);
+
+    this->setLayout(m_mainLayout);
+
+    m_scImageInfo = new QShortcut(this);
+    m_scImageInfo->setKey(tr("Alt+Return"));
+    m_scImageInfo->setContext(Qt::ApplicationShortcut);
+    m_scImageInfo->setAutoRepeat(false);
+
+    connect(m_scImageInfo, &QShortcut::activated, this, [this] {
+        emit dApp->signalM->hideExtensionPanel();
+    });
+
+    m_scImageInfonum = new QShortcut(this);
+    m_scImageInfonum->setKey(tr("Alt+Enter"));
+    m_scImageInfonum->setContext(Qt::ApplicationShortcut);
+    m_scImageInfonum->setAutoRepeat(false);
+
+    connect(m_scImageInfonum, &QShortcut::activated, this, [this] {
+        emit dApp->signalM->hideExtensionPanel();
+    });
+    // Esc
+    m_scEsc = new QShortcut(QKeySequence(Qt::Key_Escape), this);
+    m_scEsc->setContext(Qt::WindowShortcut);
+    connect(m_scEsc, &QShortcut::activated, this, [ = ] {
+        emit dApp->signalM->hideExtensionPanel(true);
+    });
+}

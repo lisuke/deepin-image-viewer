@@ -10,7 +10,9 @@ qtHaveModule(opengl): QT += opengl
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG -= app_bundle
 CONFIG += c++11 link_pkgconfig
-PKGCONFIG += x11 xext libexif dtkwidget gio-unix-2.0
+PKGCONFIG += x11 xext libexif dtkwidget gio-unix-2.0 gio-qt udisks2-qt5
+#PKGCONFIG += dtkwidget
+ QT += dtkwidget
 LIBS += -lfreeimage
 
 #gtk+-2.0
@@ -31,9 +33,9 @@ include (module/modules.pri)
 include (widgets/widgets.pri)
 include (utils/utils.pri)
 include (controller/controller.pri)
+include (service/service.pri)
 
 !isEmpty(FULL_FUNCTIONALITY) {
-    include (service/service.pri)
     include (settings/settings.pri)
     include (dirwatcher/dirwatcher.pri)
 }
@@ -45,20 +47,30 @@ SOURCES += main.cpp \
     application.cpp
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    icons/theme-icons.qrc
 
 # Automating generation .qm files from .ts files
-!system($$PWD/generate_translations.sh): error("Failed to generate translation")
+#!system($$PWD/generate_translations.sh): error("Failed to generate translation")
 
-TRANSLATIONS += \
-    translations/deepin-image-viewer.ts\
-    translations/deepin-image-viewer_zh_CN.ts
+CONFIG(release, debug|release) {
+    TRANSLATIONS = $$files($$PWD/translations/*.ts)
+    #遍历目录中的ts文件，调用lrelease将其生成为qm文件
+    for(tsfile, TRANSLATIONS) {
+        qmfile = $$replace(tsfile, .ts$, .qm)
+        system(lrelease $$tsfile -qm $$qmfile) | error("Failed to lrelease")
+    }
+}
+
+#TRANSLATIONS += \
+#    translations/deepin-image-viewer.ts\
+#    translations/deepin-image-viewer_zh_CN.ts
 
 BINDIR = $$PREFIX/bin
 APPSHAREDIR = $$PREFIX/share/deepin-image-viewer
 MANDIR = $$PREFIX/share/dman/deepin-image-viewer
 MANICONDIR = $$PREFIX/share/icons/hicolor/scalable/apps
-APPICONDIR = $$PREFIX/share/icons/deepin/apps/scalable
+APPICONDIR = $$PREFIX/share/icons/hicolor/scalable/apps
 
 DEFINES += APPSHAREDIR=\\\"$$APPSHAREDIR\\\"
 
@@ -90,7 +102,9 @@ INSTALLS = target desktop dbus_service icons manual manual_icon app_icon transla
 DISTFILES += \
     com.deepin.ImageViewer.service
 
-load(deepin_qt)
+load(dtk_qmake)
 host_sw_64: {
+# 在 sw_64 平台上添加此参数，否则会在旋转图片时崩溃
+    QMAKE_CFLAGS += -mieee
     QMAKE_CXXFLAGS += -mieee
 }

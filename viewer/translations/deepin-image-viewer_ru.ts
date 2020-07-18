@@ -1,142 +1,15 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="ru" version="2.1">
-<context>
-    <name>AboutDialog</name>
-    <message>
-        <source>Deepin Image Viewer</source>
-        <translation>Просмотр изображений Deepin</translation>
-    </message>
-    <message>
-        <source>Version:</source>
-        <translation>Версия:</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumBTContent</name>
-    <message>
-        <source>image</source>
-        <translation>изображение</translation>
-    </message>
-    <message>
-        <source>images</source>
-        <translation>изображения</translation>
-    </message>
-    <message>
-        <source>album</source>
-        <translation>альбом</translation>
-    </message>
-    <message>
-        <source>albums</source>
-        <translation>альбомы</translation>
-    </message>
-    <message>
-        <source>Manage sync</source>
-        <translation>Управление синхронизацией</translation>
-    </message>
-    <message>
-        <source>Syncing: </source>
-        <translation>Синхронизация:</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumCreateDialog</name>
-    <message>
-        <source>Cancel</source>
-        <translation>Отмена</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>ОК</translation>
-    </message>
-    <message>
-        <source>New album</source>
-        <translation>Новый альбом</translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation>Безымянный</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumDelegate</name>
-    <message>
-        <source>Recent imported</source>
-        <translation>Недавно импортированные</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Избранное</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumDeleteDialog</name>
-    <message>
-        <source>Are your sure to delete this album?</source>
-        <translation>Вы уверены, что хотите удалить альбом?</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Отмена</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Удалить</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumPanel</name>
-    <message>
-        <source>Back</source>
-        <translation>Назад</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Избранное</translation>
-    </message>
-    <message>
-        <source>Timeline</source>
-        <translation>Шкала времени</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Добавить</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Вы можете добавить каталог синхронизации или перетащить изображения на шкалу времени</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumsView</name>
-    <message>
-        <source>Unnamed</source>
-        <translation>Безымянный</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Просмотр</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Слайд-шоу</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation>Переименовать</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Копировать</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Удалить</translation>
-    </message>
-</context>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="ru">
 <context>
     <name>Application</name>
     <message>
-        <source>Deepin Image Viewer</source>
-        <translation>Просмотр Изображений Deepin</translation>
+        <source>Image Viewer</source>
+        <translation>Просмотр изображений</translation>
+    </message>
+    <message>
+        <source>Image Viewer is an image viewing tool with fashion interface and smooth performance.</source>
+        <translation>Просмотр изображений - это инструмент для просмотра изображений с модным интерфейсом и плавной работой.</translation>
     </message>
 </context>
 <context>
@@ -147,71 +20,25 @@
     </message>
 </context>
 <context>
-    <name>DirImportDialog</name>
+    <name>ExtensionPanel</name>
     <message>
-        <source>Cancel</source>
-        <translation>Отменав</translation>
+        <source>Image info</source>
+        <translation>Информация об изображении</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>ОК</translation>
-    </message>
-    <message>
-        <source>Are you sure to add the pictures to the album?</source>
-        <translation>Вы уверены, что хотите удалить альбом?</translation>
-    </message>
-    <message>
-        <source>Sync and Create</source>
-        <translation>Синхронизировать и создать</translation>
-    </message>
-    <message>
-        <source>Sync</source>
-        <translation>Синхронизировать</translation>
-    </message>
-    <message>
-        <source>Are you sure to add to the sync list and create the album named after this folder?</source>
-        <translation>Вы уверены, что добавили в список синхронизации и создали альбом, названный именем этой папки?</translation>
-    </message>
-</context>
-<context>
-    <name>Exporter</name>
-    <message>
-        <source>JPEG(*.bmp *.gif *.jpg; *.jpeg; *.png *.pbm;*.pgm *.ppm *.xbm *.xpm *.svg *.dds *.icns*.jp2 *.mng *.tga *.tiff *.wbmp *.webp;)</source>
-        <translation>JPEG(*.bmp *.gif *.jpg; *.jpeg; *.png *.pbm;*.pgm *.ppm *.xbm *.xpm *.svg *.dds *.icns*.jp2 *.mng *.tga *.tiff *.wbmp *.webp;)</translation>
-    </message>
-    <message>
-        <source>Exported successfully</source>
-        <translation>Успешно экспортированно</translation>
-    </message>
-    <message>
-        <source>Failed to export</source>
-        <translation>Экспортировать не удалось</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Сохранить</translation>
-    </message>
-</context>
-<context>
-    <name>FileDeleteDialog</name>
-    <message>
-        <source>Are you sure to throw pictures to TRASH?</source>
-        <translation>Вы уверены, что хотите выбросить изображения в КОРЗИНУ?</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Отмена</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Удалить</translation>
+        <source>Alt+Return</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ImageInfoWidget</name>
     <message>
-        <source>Image info</source>
-        <translation>Информация о изображении</translation>
+        <source>Basic info</source>
+        <translation>Основная информация</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation>Детали</translation>
     </message>
 </context>
 <context>
@@ -219,85 +46,6 @@
     <message>
         <source>This file contains multiple pages, please use Evince to view all pages.</source>
         <translation>Этот файл содержит несколько страниц, пожалуйста используйте Evince для просмотра всех страниц.</translation>
-    </message>
-</context>
-<context>
-    <name>ImagesView</name>
-    <message>
-        <source>View</source>
-        <translation>Просмотр</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation>Полный Экран</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Слайд-шоу</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Распечатать</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Копировать</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Копировать в буфер обмена</translation>
-    </message>
-    <message>
-        <source>Remove from album</source>
-        <translation>Удалить из альбома</translation>
-    </message>
-    <message>
-        <source>Favorite</source>
-        <translation>Избранное</translation>
-    </message>
-    <message>
-        <source>Unfavorite</source>
-        <translation>Удалить из избранного</translation>
-    </message>
-    <message>
-        <source>Rotate clockwise</source>
-        <translation>Вращать по часовой стрелке</translation>
-    </message>
-    <message>
-        <source>Rotate counterclockwise</source>
-        <translation>Вращать против часовой стрелки</translation>
-    </message>
-    <message>
-        <source>Set as wallpaper</source>
-        <translation>Установить в качестве обоев</translation>
-    </message>
-    <message>
-        <source>Display in file manager</source>
-        <translation>Отобразить в менеджере файлов</translation>
-    </message>
-    <message>
-        <source>Image info</source>
-        <translation>Информация о изображении</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Добавить</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Вы можете добавить каталог синхронизации или перетащить изображения на шкалу времени</translation>
-    </message>
-    <message>
-        <source>Add to album</source>
-        <translation>Добавить альбом</translation>
-    </message>
-    <message>
-        <source>Add to new album</source>
-        <translation>Добавить новый альбом</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -315,6 +63,21 @@
     </message>
 </context>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Удалить</translation>
+    </message>
+    <message>
+        <source>Image file not found</source>
+        <translation type="unfinished">Файл изображения не найден</translation>
+    </message>
+</context>
+<context>
     <name>MetadataName</name>
     <message>
         <source>Name</source>
@@ -323,10 +86,6 @@
     <message>
         <source>Type</source>
         <translation>Тип</translation>
-    </message>
-    <message>
-        <source>Date photoed</source>
-        <translation>Дата снимка</translation>
     </message>
     <message>
         <source>Date modified</source>
@@ -341,8 +100,8 @@
         <translation>Размер файла</translation>
     </message>
     <message>
-        <source>Colorspace</source>
-        <translation>Цветовое пространство</translation>
+        <source>Date captured</source>
+        <translation>Дата захвата</translation>
     </message>
     <message>
         <source>Exposure mode</source>
@@ -389,12 +148,24 @@
         <translation>Компенсация вспышки</translation>
     </message>
     <message>
+        <source>Lens model</source>
+        <translation>Модель линзы</translation>
+    </message>
+    <message>
+        <source>Colorspace</source>
+        <translation>Цветовое пространство</translation>
+    </message>
+    <message>
         <source>Camera model</source>
         <translation>Модель камеры</translation>
     </message>
     <message>
-        <source>Lens model</source>
-        <translation>Модель линзы</translation>
+        <source>Dimensions</source>
+        <translation>Размеры</translation>
+    </message>
+    <message>
+        <source>Tag</source>
+        <translation>Тег</translation>
     </message>
 </context>
 <context>
@@ -464,6 +235,10 @@
     <message>
         <source>Ring</source>
         <translation>Кольцо</translation>
+    </message>
+    <message>
+        <source>yyyy/MM/dd HH:mm:dd</source>
+        <translation>dd.MM.yyyy HH:mm:ss</translation>
     </message>
 </context>
 <context>
@@ -607,16 +382,28 @@
         <translation>Помощь</translation>
     </message>
     <message>
-        <source>Exit</source>
-        <translation>Выход</translation>
-    </message>
-    <message>
         <source>Display shortcuts</source>
         <translation>Показать сочетания</translation>
     </message>
     <message>
         <source>Delete</source>
         <translation>Удалить</translation>
+    </message>
+    <message>
+        <source>Exit fullscreen</source>
+        <translation>Выйти из полноэкранного режима</translation>
+    </message>
+    <message>
+        <source>Zoom in</source>
+        <translation>Увеличить</translation>
+    </message>
+    <message>
+        <source>Zoom out</source>
+        <translation>Уменьшить</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Открыть</translation>
     </message>
 </context>
 <context>
@@ -717,17 +504,6 @@
     </message>
 </context>
 <context>
-    <name>SlideShowPanel</name>
-    <message>
-        <source>End show</source>
-        <translation>Закончить показ</translation>
-    </message>
-    <message>
-        <source>Pause/Play</source>
-        <translation>Пауза/Воспроизведение</translation>
-    </message>
-</context>
-<context>
     <name>SlideshowFrame</name>
     <message>
         <source>Slide Settings</source>
@@ -748,6 +524,41 @@
     <message>
         <source>second</source>
         <translation>секунда</translation>
+    </message>
+</context>
+<context>
+    <name>TTBContent</name>
+    <message>
+        <source>My favorite</source>
+        <translation>Избранное</translation>
+    </message>
+    <message>
+        <source>Previous</source>
+        <translation>Предыдущее</translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <translation>Следующее</translation>
+    </message>
+    <message>
+        <source>1:1 Size</source>
+        <translation>Размер 1:1</translation>
+    </message>
+    <message>
+        <source>Fit to window</source>
+        <translation>По размеру окна</translation>
+    </message>
+    <message>
+        <source>Rotate counterclockwise</source>
+        <translation>Повернуть против часовой стрелки</translation>
+    </message>
+    <message>
+        <source>Rotate clockwise</source>
+        <translation>Повернуть по часовой стрелке</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -803,103 +614,9 @@
         <source>Open Image</source>
         <translation>Открыть Файл Изображения</translation>
     </message>
-</context>
-<context>
-    <name>TimelineBTContent</name>
     <message>
-        <source>%1 image</source>
-        <translation>%1 изображение</translation>
-    </message>
-    <message>
-        <source>%1 images</source>
-        <translation>%1 изображения</translation>
-    </message>
-    <message>
-        <source>Manage sync</source>
-        <translation>Управление синхронизацией</translation>
-    </message>
-    <message>
-        <source>Syncing: </source>
-        <translation>Синхронизация:</translation>
-    </message>
-</context>
-<context>
-    <name>TimelinePanel</name>
-    <message>
-        <source>Album</source>
-        <translation>Альбом</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Добавить</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Вы можете добавить каталог синхронизации или перетащить изображения на шкалу времени</translation>
-    </message>
-    <message>
-        <source>Add to album</source>
-        <translation>Добавить альбом</translation>
-    </message>
-    <message>
-        <source>Add to new album</source>
-        <translation>Добавить новый альбом</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Просмотр</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation>Полный Экран</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Слайд-шоу</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Распечатать</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Копировать</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Копировать в буфер обмена</translation>
-    </message>
-    <message>
-        <source>Favorite</source>
-        <translation>Избранное</translation>
-    </message>
-    <message>
-        <source>Unfavorite</source>
-        <translation>Удалить из избранного</translation>
-    </message>
-    <message>
-        <source>Rotate clockwise</source>
-        <translation>Повернуть по часовой стрелке</translation>
-    </message>
-    <message>
-        <source>Rotate counterclockwise</source>
-        <translation>Повернуть против часовой стрелки</translation>
-    </message>
-    <message>
-        <source>Set as wallpaper</source>
-        <translation>Установить в качестве обоев</translation>
-    </message>
-    <message>
-        <source>Display in file manager</source>
-        <translation>Отобразить в менеджере файлов</translation>
-    </message>
-    <message>
-        <source>Image info</source>
-        <translation>Информация о изображении</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Удалить</translation>
+        <source>Image file not found</source>
+        <translation>Файл изображения не найден</translation>
     </message>
 </context>
 <context>
@@ -930,21 +647,6 @@
     </message>
 </context>
 <context>
-    <name>TopAlbumTips</name>
-    <message>
-        <source>dd MMMM yyyy</source>
-        <translation>dd MMMM yyyy</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Избранное</translation>
-    </message>
-    <message>
-        <source>Recent imported</source>
-        <translation>Недавно импортированные </translation>
-    </message>
-</context>
-<context>
     <name>TopToolbar</name>
     <message>
         <source>New album</source>
@@ -953,22 +655,6 @@
     <message>
         <source>Settings</source>
         <translation>Настройки</translation>
-    </message>
-    <message>
-        <source>Deepin Image Viewer is a fashion &amp; smooth image manager.</source>
-        <translation>Deepin Image Viewer - это современный и изящный менеджер изображений.</translation>
-    </message>
-    <message>
-        <source>It is featured with image management, image viewing and basic image editing.</source>
-        <translation>Он предназначен для управления, просмотра и редактирования изображениями начального уровня.</translation>
-    </message>
-    <message>
-        <source>Dark theme</source>
-        <translation>Темная тема</translation>
-    </message>
-    <message>
-        <source>Deepin Image Viewer is an image viewing tool with fashion interface and smooth performance.</source>
-        <translation>Deepin Image Viewer - это современный плавно работающий и изящный менеджер изображений</translation>
     </message>
 </context>
 <context>
@@ -1004,10 +690,6 @@
     <message>
         <source>Copy</source>
         <translation>Копировать</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Копировать в буфер обмена</translation>
     </message>
     <message>
         <source>Remove from album</source>

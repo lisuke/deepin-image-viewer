@@ -1,142 +1,15 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="sk" version="2.1">
-<context>
-    <name>AboutDialog</name>
-    <message>
-        <source>Deepin Image Viewer</source>
-        <translation>Deepin Prehliadač obrázkov</translation>
-    </message>
-    <message>
-        <source>Version:</source>
-        <translation>Verzia:</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumBTContent</name>
-    <message>
-        <source>image</source>
-        <translation>obrázok</translation>
-    </message>
-    <message>
-        <source>images</source>
-        <translation>obrázky</translation>
-    </message>
-    <message>
-        <source>album</source>
-        <translation>album</translation>
-    </message>
-    <message>
-        <source>albums</source>
-        <translation>albumy</translation>
-    </message>
-    <message>
-        <source>Manage sync</source>
-        <translation>Správa synchronizácie</translation>
-    </message>
-    <message>
-        <source>Syncing: </source>
-        <translation>Synchronizácia:</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumCreateDialog</name>
-    <message>
-        <source>Cancel</source>
-        <translation>Zrušiť</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>New album</source>
-        <translation>Nový album</translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation>Nepomenované</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumDelegate</name>
-    <message>
-        <source>Recent imported</source>
-        <translation>Posledné importované</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Moje obľúbené</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumDeleteDialog</name>
-    <message>
-        <source>Are your sure to delete this album?</source>
-        <translation>Naozaj chcete vymazať tento album?</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Zrušiť</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Odstrániť</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumPanel</name>
-    <message>
-        <source>Back</source>
-        <translation>Späť</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Moje obľúbené</translation>
-    </message>
-    <message>
-        <source>Timeline</source>
-        <translation>Časová os</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Pridať</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Môžete pridať synchronizáciu priečinka alebo pretiahnuť a pustiť obrázky do časovej osi</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumsView</name>
-    <message>
-        <source>Unnamed</source>
-        <translation>Nepomenované</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Náhľad</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Sled snímkov</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation>Premenovať</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Kopírovať</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Odstrániť</translation>
-    </message>
-</context>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="sk">
 <context>
     <name>Application</name>
     <message>
-        <source>Deepin Image Viewer</source>
-        <translation>Deepin Prehliadač obrázkov</translation>
+        <source>Image Viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image Viewer is an image viewing tool with fashion interface and smooth performance.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -147,71 +20,25 @@
     </message>
 </context>
 <context>
-    <name>DirImportDialog</name>
+    <name>ExtensionPanel</name>
     <message>
-        <source>Cancel</source>
-        <translation>Zrušiť</translation>
+        <source>Image info</source>
+        <translation type="unfinished">Informácie o obrázku</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Are you sure to add the pictures to the album?</source>
-        <translation>Naozaj chcete pridať obrázky do albumu?</translation>
-    </message>
-    <message>
-        <source>Sync and Create</source>
-        <translation>Synchronizovať a vytvoriť</translation>
-    </message>
-    <message>
-        <source>Sync</source>
-        <translation>Synchronizovať</translation>
-    </message>
-    <message>
-        <source>Are you sure to add to the sync list and create the album named after this folder?</source>
-        <translation>Naozaj chcete pridať do zoznamu synchronizácie a vytvoriť album pomenovaný po tejto zložke?</translation>
-    </message>
-</context>
-<context>
-    <name>Exporter</name>
-    <message>
-        <source>JPEG(*.bmp *.gif *.jpg; *.jpeg; *.png *.pbm;*.pgm *.ppm *.xbm *.xpm *.svg *.dds *.icns*.jp2 *.mng *.tga *.tiff *.wbmp *.webp;)</source>
-        <translation>JPEG(*.bmp *.gif *.jpg; *.jpeg; *.png *.pbm;*.pgm *.ppm *.xbm *.xpm *.svg *.dds *.icns*.jp2 *.mng *.tga *.tiff *.wbmp *.webp;)</translation>
-    </message>
-    <message>
-        <source>Exported successfully</source>
-        <translation>Exportovanie úspešné</translation>
-    </message>
-    <message>
-        <source>Failed to export</source>
-        <translation>Exportovanie zlyhalo</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Uložiť</translation>
-    </message>
-</context>
-<context>
-    <name>FileDeleteDialog</name>
-    <message>
-        <source>Are you sure to throw pictures to TRASH?</source>
-        <translation>Naozaj chcete hodiť fotografie do KOŠA?</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Zrušiť</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Odstrániť</translation>
+        <source>Alt+Return</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ImageInfoWidget</name>
     <message>
-        <source>Image info</source>
-        <translation>Informácie o obrázku</translation>
+        <source>Basic info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -219,85 +46,6 @@
     <message>
         <source>This file contains multiple pages, please use Evince to view all pages.</source>
         <translation>Tento súbor obsahuje viac stránok, použite prosím Evince na zobrazenie všetkých stránok.</translation>
-    </message>
-</context>
-<context>
-    <name>ImagesView</name>
-    <message>
-        <source>View</source>
-        <translation>Náhľad</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation>Celá obrazovka</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Sled snímkov</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Tlač</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Kopírovanie</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Skopírovať do schránky</translation>
-    </message>
-    <message>
-        <source>Remove from album</source>
-        <translation>Odstrániť z albumu</translation>
-    </message>
-    <message>
-        <source>Favorite</source>
-        <translation>Obľúbené</translation>
-    </message>
-    <message>
-        <source>Unfavorite</source>
-        <translation>Neobľúbené</translation>
-    </message>
-    <message>
-        <source>Rotate clockwise</source>
-        <translation>Otočiť v smere hodinových ručičiek</translation>
-    </message>
-    <message>
-        <source>Rotate counterclockwise</source>
-        <translation>Otočiť proti smeru hodinových ručičiek</translation>
-    </message>
-    <message>
-        <source>Set as wallpaper</source>
-        <translation>Nastaviť ako pozadie</translation>
-    </message>
-    <message>
-        <source>Display in file manager</source>
-        <translation>Zobraziť v správcovi súborov</translation>
-    </message>
-    <message>
-        <source>Image info</source>
-        <translation>Informácie o obrázku</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Pridať</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Môžete pridať synchronizáciu priečinka alebo pretiahnuť a pustiť obrázky do časovej osi</translation>
-    </message>
-    <message>
-        <source>Add to album</source>
-        <translation>Pridať do albumu</translation>
-    </message>
-    <message>
-        <source>Add to new album</source>
-        <translation>Pridať do nového albumu</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -315,6 +63,21 @@
     </message>
 </context>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Zrušiť</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Odstrániť</translation>
+    </message>
+    <message>
+        <source>Image file not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MetadataName</name>
     <message>
         <source>Name</source>
@@ -325,24 +88,20 @@
         <translation>Typ</translation>
     </message>
     <message>
-        <source>Date photoed</source>
-        <translation>Dátum fotografovania</translation>
-    </message>
-    <message>
         <source>Date modified</source>
         <translation>Dátum úpravy</translation>
     </message>
     <message>
         <source>Dimension</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File size</source>
         <translation>Veľkosť súboru</translation>
     </message>
     <message>
-        <source>Colorspace</source>
-        <translation>Farebný priestor</translation>
+        <source>Date captured</source>
+        <translation>Dátum fotografovania</translation>
     </message>
     <message>
         <source>Exposure mode</source>
@@ -389,12 +148,24 @@
         <translation>Korekcia zábleskovej expozície</translation>
     </message>
     <message>
+        <source>Lens model</source>
+        <translation>Model objektívu</translation>
+    </message>
+    <message>
+        <source>Colorspace</source>
+        <translation>Farebný priestor</translation>
+    </message>
+    <message>
         <source>Camera model</source>
         <translation>Model fotoaparátu</translation>
     </message>
     <message>
-        <source>Lens model</source>
-        <translation>Model objektívu</translation>
+        <source>Dimensions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tag</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -444,7 +215,7 @@
     <name>PrintPreviewDialog</name>
     <message>
         <source>Image Settings</source>
-        <translation type="unfinished"/>
+        <translation>Nastavenia obrázku</translation>
     </message>
 </context>
 <context>
@@ -464,6 +235,10 @@
     <message>
         <source>Ring</source>
         <translation>Prsteň</translation>
+    </message>
+    <message>
+        <source>yyyy/MM/dd HH:mm:dd</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -607,16 +382,28 @@
         <translation>Pomoc</translation>
     </message>
     <message>
-        <source>Exit</source>
-        <translation>Ukončiť</translation>
-    </message>
-    <message>
         <source>Display shortcuts</source>
         <translation>Zobrazenie skratiek</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>Odstrániť</translation>
+    </message>
+    <message>
+        <source>Exit fullscreen</source>
+        <translation type="unfinished">Ukončiť celú obrazovku</translation>
+    </message>
+    <message>
+        <source>Zoom in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -717,17 +504,6 @@
     </message>
 </context>
 <context>
-    <name>SlideShowPanel</name>
-    <message>
-        <source>End show</source>
-        <translation>Ukončiť sled obrázkov</translation>
-    </message>
-    <message>
-        <source>Pause/Play</source>
-        <translation>Pauza/Prehrať</translation>
-    </message>
-</context>
-<context>
     <name>SlideshowFrame</name>
     <message>
         <source>Slide Settings</source>
@@ -748,6 +524,41 @@
     <message>
         <source>second</source>
         <translation>sekunda</translation>
+    </message>
+</context>
+<context>
+    <name>TTBContent</name>
+    <message>
+        <source>My favorite</source>
+        <translation type="unfinished">Moje obľúbené</translation>
+    </message>
+    <message>
+        <source>Previous</source>
+        <translation type="unfinished">Predchádzajúca</translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <translation type="unfinished">Ďalej</translation>
+    </message>
+    <message>
+        <source>1:1 Size</source>
+        <translation type="unfinished">Veľkosť 1:1</translation>
+    </message>
+    <message>
+        <source>Fit to window</source>
+        <translation type="unfinished">Prispôsobiť oknu</translation>
+    </message>
+    <message>
+        <source>Rotate counterclockwise</source>
+        <translation type="unfinished">Otočiť proti smeru hodinových ručičiek</translation>
+    </message>
+    <message>
+        <source>Rotate clockwise</source>
+        <translation type="unfinished">Otočiť v smere hodinových ručičiek</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Odstrániť</translation>
     </message>
 </context>
 <context>
@@ -790,7 +601,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>Odstrániť</translation>
     </message>
 </context>
 <context>
@@ -801,105 +612,11 @@
     </message>
     <message>
         <source>Open Image</source>
-        <translation type="unfinished"/>
-    </message>
-</context>
-<context>
-    <name>TimelineBTContent</name>
-    <message>
-        <source>%1 image</source>
-        <translation>%1 obrázok</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 images</source>
-        <translation>%1 obrázky</translation>
-    </message>
-    <message>
-        <source>Manage sync</source>
-        <translation>Správa synchronizácie</translation>
-    </message>
-    <message>
-        <source>Syncing: </source>
-        <translation>Synchronizácia:</translation>
-    </message>
-</context>
-<context>
-    <name>TimelinePanel</name>
-    <message>
-        <source>Album</source>
-        <translation>Album</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Pridať</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Môžete pridať synchronizáciu priečinka alebo pretiahnuť a pustiť obrázky do časovej osi</translation>
-    </message>
-    <message>
-        <source>Add to album</source>
-        <translation>Pridať do albumu</translation>
-    </message>
-    <message>
-        <source>Add to new album</source>
-        <translation>Pridať do nového albumu</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Náhľad</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation>Celá obrazovka</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Sled snímkov</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Tlač</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Kopírovať</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Skopírovať do schránky</translation>
-    </message>
-    <message>
-        <source>Favorite</source>
-        <translation>Obľúbené</translation>
-    </message>
-    <message>
-        <source>Unfavorite</source>
-        <translation>Neobľúbené</translation>
-    </message>
-    <message>
-        <source>Rotate clockwise</source>
-        <translation>Otočiť v smere hodinových ručičiek</translation>
-    </message>
-    <message>
-        <source>Rotate counterclockwise</source>
-        <translation>Otočiť proti smeru hodinových ručičiek</translation>
-    </message>
-    <message>
-        <source>Set as wallpaper</source>
-        <translation>Nastaviť ako pozadie</translation>
-    </message>
-    <message>
-        <source>Display in file manager</source>
-        <translation>Zobraziť v správcovi súborov</translation>
-    </message>
-    <message>
-        <source>Image info</source>
-        <translation>Informácie o obrázku</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"/>
+        <source>Image file not found</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -930,21 +647,6 @@
     </message>
 </context>
 <context>
-    <name>TopAlbumTips</name>
-    <message>
-        <source>dd MMMM yyyy</source>
-        <translation>dd MMMM rrrr</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Moje obľúbené</translation>
-    </message>
-    <message>
-        <source>Recent imported</source>
-        <translation>Posledné importované</translation>
-    </message>
-</context>
-<context>
     <name>TopToolbar</name>
     <message>
         <source>New album</source>
@@ -953,22 +655,6 @@
     <message>
         <source>Settings</source>
         <translation>Nastavenia</translation>
-    </message>
-    <message>
-        <source>Deepin Image Viewer is a fashion &amp; smooth image manager.</source>
-        <translation>Deepin Prehliadač obrázkov je módny a plynulý manažér obrázkov.</translation>
-    </message>
-    <message>
-        <source>It is featured with image management, image viewing and basic image editing.</source>
-        <translation>Obsahuje správu obrázkov, prezeranie obrázkov a základnú úpravu obrázkov.</translation>
-    </message>
-    <message>
-        <source>Dark theme</source>
-        <translation>Tmavá téma</translation>
-    </message>
-    <message>
-        <source>Deepin Image Viewer is an image viewing tool with fashion interface and smooth performance.</source>
-        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1004,10 +690,6 @@
     <message>
         <source>Copy</source>
         <translation>Kopírovať</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Skopírovať do schránky</translation>
     </message>
     <message>
         <source>Remove from album</source>
@@ -1051,15 +733,15 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>Odstrániť</translation>
     </message>
     <message>
         <source>Open Image</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All images</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

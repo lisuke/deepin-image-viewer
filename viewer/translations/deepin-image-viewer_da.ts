@@ -1,142 +1,15 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="da" version="2.1">
-<context>
-    <name>AboutDialog</name>
-    <message>
-        <source>Deepin Image Viewer</source>
-        <translation>Deepin billedfremviser</translation>
-    </message>
-    <message>
-        <source>Version:</source>
-        <translation>Version:</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumBTContent</name>
-    <message>
-        <source>image</source>
-        <translation>billede</translation>
-    </message>
-    <message>
-        <source>images</source>
-        <translation>billeder</translation>
-    </message>
-    <message>
-        <source>album</source>
-        <translation>album</translation>
-    </message>
-    <message>
-        <source>albums</source>
-        <translation>albummer</translation>
-    </message>
-    <message>
-        <source>Manage sync</source>
-        <translation>Håndter synkronisering</translation>
-    </message>
-    <message>
-        <source>Syncing: </source>
-        <translation>Synkroniserer: </translation>
-    </message>
-</context>
-<context>
-    <name>AlbumCreateDialog</name>
-    <message>
-        <source>Cancel</source>
-        <translation>Annuller</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>New album</source>
-        <translation>Nyt album</translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation>Unavngivet</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumDelegate</name>
-    <message>
-        <source>Recent imported</source>
-        <translation>Importeret for nyligt</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Min favorit</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumDeleteDialog</name>
-    <message>
-        <source>Are your sure to delete this album?</source>
-        <translation>Er du sikker på, at du vil slette dette album?</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Annuller</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Slet</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumPanel</name>
-    <message>
-        <source>Back</source>
-        <translation>Tilbage</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Min favorit</translation>
-    </message>
-    <message>
-        <source>Timeline</source>
-        <translation>Tidslinje</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Tilføj</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Du kan tilføje synkroniseringsmapper eller trække og slipper billeder på tidslinjen</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumsView</name>
-    <message>
-        <source>Unnamed</source>
-        <translation>Unavngivet</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Vis</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Diasshow</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation>Omdøb</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Kopiér</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Slet</translation>
-    </message>
-</context>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="da">
 <context>
     <name>Application</name>
     <message>
-        <source>Deepin Image Viewer</source>
-        <translation>Deepin billedfremviser</translation>
+        <source>Image Viewer</source>
+        <translation>Billedfremviser</translation>
+    </message>
+    <message>
+        <source>Image Viewer is an image viewing tool with fashion interface and smooth performance.</source>
+        <translation>Billedfremviser er et værktøj til billedfremvisning med flot brugerflade og god ydelse.</translation>
     </message>
 </context>
 <context>
@@ -147,71 +20,25 @@
     </message>
 </context>
 <context>
-    <name>DirImportDialog</name>
+    <name>ExtensionPanel</name>
     <message>
-        <source>Cancel</source>
-        <translation>Annuller</translation>
+        <source>Image info</source>
+        <translation>Billedinfo</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Are you sure to add the pictures to the album?</source>
-        <translation>Er du sikker på, at du vil tilføje billederne til albummet?</translation>
-    </message>
-    <message>
-        <source>Sync and Create</source>
-        <translation>Synkronisér og opret</translation>
-    </message>
-    <message>
-        <source>Sync</source>
-        <translation>Synkronisér</translation>
-    </message>
-    <message>
-        <source>Are you sure to add to the sync list and create the album named after this folder?</source>
-        <translation>Er du sikker på, at du vil tilføje til synkroniseringslisten og oprette albummet som er navngivet efter denne mappe?</translation>
-    </message>
-</context>
-<context>
-    <name>Exporter</name>
-    <message>
-        <source>JPEG(*.bmp *.gif *.jpg; *.jpeg; *.png *.pbm;*.pgm *.ppm *.xbm *.xpm *.svg *.dds *.icns*.jp2 *.mng *.tga *.tiff *.wbmp *.webp;)</source>
-        <translation>JPEG (*.bmp, *.gif, *.jpg, *.jpeg, *.png, *.pbm, *.pgm, *.ppm, *.xbm, *.xpm, *.svg, *.dds, *.icns, *.jp2, *.mng, *.tga, *.tiff, *.wbmp, *.webp)</translation>
-    </message>
-    <message>
-        <source>Exported successfully</source>
-        <translation>Eksport lykkedes</translation>
-    </message>
-    <message>
-        <source>Failed to export</source>
-        <translation>Export fejlede</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Gem</translation>
-    </message>
-</context>
-<context>
-    <name>FileDeleteDialog</name>
-    <message>
-        <source>Are you sure to throw pictures to TRASH?</source>
-        <translation>Er du sikker på, at du vil smide billeder i papirkurven?</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Annuller</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Slet</translation>
+        <source>Alt+Return</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ImageInfoWidget</name>
     <message>
-        <source>Image info</source>
-        <translation>Billedinfo</translation>
+        <source>Basic info</source>
+        <translation>Grundlæggende info</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation>Detaljer</translation>
     </message>
 </context>
 <context>
@@ -219,85 +46,6 @@
     <message>
         <source>This file contains multiple pages, please use Evince to view all pages.</source>
         <translation>Filen indeholder flere sider, brug venligst Evince til at vise alle sider.</translation>
-    </message>
-</context>
-<context>
-    <name>ImagesView</name>
-    <message>
-        <source>View</source>
-        <translation>Vis</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation>Fuldskærm</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Diasshow</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Udskriv</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Kopiér</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Kopiér til udklipsholder</translation>
-    </message>
-    <message>
-        <source>Remove from album</source>
-        <translation>Fjern fra album</translation>
-    </message>
-    <message>
-        <source>Favorite</source>
-        <translation>Sæt som favorit</translation>
-    </message>
-    <message>
-        <source>Unfavorite</source>
-        <translation>Fjern fra favorit</translation>
-    </message>
-    <message>
-        <source>Rotate clockwise</source>
-        <translation>Rotér med uret</translation>
-    </message>
-    <message>
-        <source>Rotate counterclockwise</source>
-        <translation>Rotér mod uret</translation>
-    </message>
-    <message>
-        <source>Set as wallpaper</source>
-        <translation>Sæt som tapet</translation>
-    </message>
-    <message>
-        <source>Display in file manager</source>
-        <translation>Vis i filhåndtering</translation>
-    </message>
-    <message>
-        <source>Image info</source>
-        <translation>Billedinfo</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Tilføj</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Du kan tilføje synkroniseringsmapper eller trække og slipper billeder på tidslinjen</translation>
-    </message>
-    <message>
-        <source>Add to album</source>
-        <translation>Tilføj til album</translation>
-    </message>
-    <message>
-        <source>Add to new album</source>
-        <translation>Tilføj til nyt album</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Slet</translation>
     </message>
 </context>
 <context>
@@ -315,6 +63,21 @@
     </message>
 </context>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <source>Cancel</source>
+        <translation>Annuller</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Slet</translation>
+    </message>
+    <message>
+        <source>Image file not found</source>
+        <translation type="unfinished">Billedfil ikke fundet</translation>
+    </message>
+</context>
+<context>
     <name>MetadataName</name>
     <message>
         <source>Name</source>
@@ -323,10 +86,6 @@
     <message>
         <source>Type</source>
         <translation>Type</translation>
-    </message>
-    <message>
-        <source>Date photoed</source>
-        <translation>Fotograferingsdato</translation>
     </message>
     <message>
         <source>Date modified</source>
@@ -341,8 +100,8 @@
         <translation>Filstørrelse</translation>
     </message>
     <message>
-        <source>Colorspace</source>
-        <translation>Farverum</translation>
+        <source>Date captured</source>
+        <translation>Optagelsesdato</translation>
     </message>
     <message>
         <source>Exposure mode</source>
@@ -389,12 +148,24 @@
         <translation>Blitzkompensering</translation>
     </message>
     <message>
+        <source>Lens model</source>
+        <translation>Linsemodel</translation>
+    </message>
+    <message>
+        <source>Colorspace</source>
+        <translation>Farverum</translation>
+    </message>
+    <message>
         <source>Camera model</source>
         <translation>Kameramodel</translation>
     </message>
     <message>
-        <source>Lens model</source>
-        <translation>Linsemodel</translation>
+        <source>Dimensions</source>
+        <translation>Dimensioner</translation>
+    </message>
+    <message>
+        <source>Tag</source>
+        <translation>Mærkat</translation>
     </message>
 </context>
 <context>
@@ -464,6 +235,10 @@
     <message>
         <source>Ring</source>
         <translation>Cirkel</translation>
+    </message>
+    <message>
+        <source>yyyy/MM/dd HH:mm:dd</source>
+        <translation>dd/MM/yyyy HH:mm:dd</translation>
     </message>
 </context>
 <context>
@@ -607,16 +382,28 @@
         <translation>Hjælp</translation>
     </message>
     <message>
-        <source>Exit</source>
-        <translation>Afslut</translation>
-    </message>
-    <message>
         <source>Display shortcuts</source>
         <translation>Vis genveje</translation>
     </message>
     <message>
         <source>Delete</source>
         <translation>Slet</translation>
+    </message>
+    <message>
+        <source>Exit fullscreen</source>
+        <translation>Forlad fuldskærm</translation>
+    </message>
+    <message>
+        <source>Zoom in</source>
+        <translation>Zoom ind</translation>
+    </message>
+    <message>
+        <source>Zoom out</source>
+        <translation>Zoom ud</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Åbn</translation>
     </message>
 </context>
 <context>
@@ -717,17 +504,6 @@
     </message>
 </context>
 <context>
-    <name>SlideShowPanel</name>
-    <message>
-        <source>End show</source>
-        <translation>Afslut show</translation>
-    </message>
-    <message>
-        <source>Pause/Play</source>
-        <translation>Pause/afspil</translation>
-    </message>
-</context>
-<context>
     <name>SlideshowFrame</name>
     <message>
         <source>Slide Settings</source>
@@ -748,6 +524,41 @@
     <message>
         <source>second</source>
         <translation>sekund</translation>
+    </message>
+</context>
+<context>
+    <name>TTBContent</name>
+    <message>
+        <source>My favorite</source>
+        <translation>Min favorit</translation>
+    </message>
+    <message>
+        <source>Previous</source>
+        <translation>Forrige</translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <translation>Næste</translation>
+    </message>
+    <message>
+        <source>1:1 Size</source>
+        <translation>1:1 størrelse</translation>
+    </message>
+    <message>
+        <source>Fit to window</source>
+        <translation>Tilpas til vindue</translation>
+    </message>
+    <message>
+        <source>Rotate counterclockwise</source>
+        <translation>Rotér mod uret</translation>
+    </message>
+    <message>
+        <source>Rotate clockwise</source>
+        <translation>Rotér med uret</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Slet</translation>
     </message>
 </context>
 <context>
@@ -803,103 +614,9 @@
         <source>Open Image</source>
         <translation>Åbn billede</translation>
     </message>
-</context>
-<context>
-    <name>TimelineBTContent</name>
     <message>
-        <source>%1 image</source>
-        <translation>%1 billede</translation>
-    </message>
-    <message>
-        <source>%1 images</source>
-        <translation>%1 billeder</translation>
-    </message>
-    <message>
-        <source>Manage sync</source>
-        <translation>Håndter synkronisering</translation>
-    </message>
-    <message>
-        <source>Syncing: </source>
-        <translation>Synkroniserer: </translation>
-    </message>
-</context>
-<context>
-    <name>TimelinePanel</name>
-    <message>
-        <source>Album</source>
-        <translation>Album</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Tilføj</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Du kan tilføje synkroniseringsmapper eller trække og slipper billeder på tidslinjen</translation>
-    </message>
-    <message>
-        <source>Add to album</source>
-        <translation>Tilføj til album</translation>
-    </message>
-    <message>
-        <source>Add to new album</source>
-        <translation>Tilføj til nyt album</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Vis</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation>Fuldskærm</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Diasshow</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Udskriv</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Kopiér</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Kopiér til udklipsholder</translation>
-    </message>
-    <message>
-        <source>Favorite</source>
-        <translation>Sæt som favorit</translation>
-    </message>
-    <message>
-        <source>Unfavorite</source>
-        <translation>Fjern fra favorit</translation>
-    </message>
-    <message>
-        <source>Rotate clockwise</source>
-        <translation>Rotér med uret</translation>
-    </message>
-    <message>
-        <source>Rotate counterclockwise</source>
-        <translation>Rotér mod uret</translation>
-    </message>
-    <message>
-        <source>Set as wallpaper</source>
-        <translation>Sæt som tapet</translation>
-    </message>
-    <message>
-        <source>Display in file manager</source>
-        <translation>Vis i filhåndtering</translation>
-    </message>
-    <message>
-        <source>Image info</source>
-        <translation>Billedinfo</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Slet</translation>
+        <source>Image file not found</source>
+        <translation>Billedfil ikke fundet</translation>
     </message>
 </context>
 <context>
@@ -930,21 +647,6 @@
     </message>
 </context>
 <context>
-    <name>TopAlbumTips</name>
-    <message>
-        <source>dd MMMM yyyy</source>
-        <translation>dd MMMM åååå</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Min favorit</translation>
-    </message>
-    <message>
-        <source>Recent imported</source>
-        <translation>Importeret for nyligt</translation>
-    </message>
-</context>
-<context>
     <name>TopToolbar</name>
     <message>
         <source>New album</source>
@@ -953,22 +655,6 @@
     <message>
         <source>Settings</source>
         <translation>Indstillinger</translation>
-    </message>
-    <message>
-        <source>Deepin Image Viewer is a fashion &amp; smooth image manager.</source>
-        <translation>Deepin billedfremviser er en moderigtig og glat billedhåndtering.</translation>
-    </message>
-    <message>
-        <source>It is featured with image management, image viewing and basic image editing.</source>
-        <translation>Dens faciliteter er billedhåndtering, billedvisning og grundlæggende billedredigering.</translation>
-    </message>
-    <message>
-        <source>Dark theme</source>
-        <translation>Mørkt tema</translation>
-    </message>
-    <message>
-        <source>Deepin Image Viewer is an image viewing tool with fashion interface and smooth performance.</source>
-        <translation>Deepin billedfremviser er et billedfremviserværktøj med moderigtig brugerflade og glat ydelse.</translation>
     </message>
 </context>
 <context>
@@ -1004,10 +690,6 @@
     <message>
         <source>Copy</source>
         <translation>Kopiér</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Kopiér til udklipsholder</translation>
     </message>
     <message>
         <source>Remove from album</source>

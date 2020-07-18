@@ -24,12 +24,16 @@
 #include "utils/baseutils.h"
 
 #include <QTimer>
+#include <DBlurEffectWidget>
+#include <DFontSizeManager>
+#include <DFloatingWidget>
+#include <QHBoxLayout>
 
 DWIDGET_USE_NAMESPACE
 
 void ViewPanel::initFloatingComponent()
 {
-    initSwitchButtons();
+//    initSwitchButtons();
     initScaleLabel();
     initNavigation();
 }
@@ -44,14 +48,6 @@ void ViewPanel::initSwitchButtons()
     pre_button->setObjectName("PreviousButton");
     next_button->setObjectName("NextButton");
 
-    if (dApp->viewerTheme->getCurrentTheme() == ViewerThemeManager::Dark) {
-        pre_button->setStyleSheet(getFileContent(":/resources/dark/qss/floating.qss"));
-        next_button->setStyleSheet(getFileContent(":/resources/dark/qss/floating.qss"));
-    } else {
-        pre_button->setStyleSheet(getFileContent(":/resources/light/qss/floating.qss"));
-        next_button->setStyleSheet(getFileContent(":/resources/light/qss/floating.qss"));
-    }
-
     pre_button.setAnchor(Qt::AnchorVerticalCenter, this, Qt::AnchorVerticalCenter);
     pre_button.setAnchor(Qt::AnchorLeft, this, Qt::AnchorLeft);
 
@@ -64,32 +60,17 @@ void ViewPanel::initSwitchButtons()
     pre_button->hide();
     next_button->hide();
 
-    // pre_button.setLeftMargin(20);
-    // next_button.setRightMargin(20);
-
     connect(pre_button, &DImageButton::clicked, this, &ViewPanel::showPrevious);
     connect(next_button, &DImageButton::clicked, this, &ViewPanel::showNext);
 
-    connect(dApp->viewerTheme, &ViewerThemeManager::viewerThemeChanged, this,
-            [=](ViewerThemeManager::AppTheme theme) {
-        if (theme == ViewerThemeManager::Dark) {
-            pre_button->setStyleSheet(getFileContent(
-                                         ":/resources/dark/qss/floating.qss"));
-            next_button->setStyleSheet(getFileContent(
-                                          ":/resources/dark/qss/floating.qss"));
-        } else {
-            pre_button->setStyleSheet(getFileContent(
-                                         ":/resources/light/qss/floating.qss"));
-            next_button->setStyleSheet(getFileContent(
-                                          ":/resources/light/qss/floating.qss"));
-        }
-    });
 
-    connect(this, &ViewPanel::mouseMoved, this, [=] {
+    connect(this, &ViewPanel::mouseMoved, this, [ = ] {
         DAnchors<DImageButton> pb = pre_button;
-        if (m_info && m_info->visibleRegion().isNull()) {
+        if (m_info && m_info->visibleRegion().isNull())
+        {
             pb.setLeftMargin(0);
-        } else {
+        } else
+        {
             pb.setLeftMargin(240);
         }
 
@@ -97,10 +78,12 @@ void ViewPanel::initSwitchButtons()
         QRect left_rect = pre_button->geometry();
         QRect right_rect = next_button->geometry();
 
-        if (left_rect.contains(pos, true) || right_rect.contains(pos)) {
+        if (left_rect.contains(pos, true) || right_rect.contains(pos))
+        {
             pre_button->show();
             next_button->show();
-        } else {
+        } else
+        {
             pre_button->hide();
             next_button->hide();
         }
@@ -110,62 +93,69 @@ void ViewPanel::initSwitchButtons()
 void ViewPanel::initScaleLabel()
 {
     using namespace utils::base;
-    DAnchors<QLabel> scalePerc = new QLabel(this);
-    scalePerc->setObjectName("ScaleLabel");
-    if (dApp->viewerTheme->getCurrentTheme() == ViewerThemeManager::Dark) {
-        scalePerc->setStyleSheet(getFileContent(":/resources/dark/qss/floating.qss"));
-    } else {
-        scalePerc->setStyleSheet(getFileContent(":/resources/light/qss/floating.qss"));
-    }
+    DAnchors<DFloatingWidget> scalePerc = new DFloatingWidget(this);
+    scalePerc->setBlurBackgroundEnabled(true);
 
+    QHBoxLayout *layout = new QHBoxLayout();
+    scalePerc->setLayout(layout);
+    QLabel *label = new QLabel();
+    layout->addWidget(label);
     scalePerc->setAttribute(Qt::WA_TransparentForMouseEvents);
     scalePerc.setAnchor(Qt::AnchorHorizontalCenter, this, Qt::AnchorHorizontalCenter);
     scalePerc.setAnchor(Qt::AnchorBottom, this, Qt::AnchorBottom);
-    scalePerc.setBottomMargin(54);
-    scalePerc->setAlignment(Qt::AlignCenter);
-    scalePerc->setFixedSize(82, 48);
-    scalePerc->setText("100%");
+    scalePerc.setBottomMargin(75 + 14);
+    label->setAlignment(Qt::AlignCenter);
+//    scalePerc->setFixedSize(82, 48);
+    scalePerc->setFixedWidth(90 + 10);
+    scalePerc->setFixedHeight(40 + 10);
+    scalePerc->adjustSize();
+    label->setText("100%");
+    DFontSizeManager::instance()->bind(label, DFontSizeManager::T6);
     scalePerc->hide();
 
     QTimer *hideT = new QTimer(this);
     hideT->setSingleShot(true);
     connect(hideT, &QTimer::timeout, scalePerc, &QLabel::hide);
 
-    connect(m_viewB, &ImageView::scaled, this, [=](qreal perc) {
-        scalePerc->setText(QString("%1%").arg(int(perc)));
+    connect(m_viewB, &ImageView::scaled, this, [ = ](qreal perc) {
+        label->setText(QString("%1%").arg(int(perc)));
+        if (perc > 100) {
+            emit dApp->signalM->enterScaledMode(true);
+            emit dApp->signalM->isAdapt(false);
+        } else if (perc == 100.0) {
+            emit dApp->signalM->enterScaledMode(false);
+            emit dApp->signalM->isAdapt(true);
+        } else {
+            emit dApp->signalM->enterScaledMode(false);
+            emit dApp->signalM->isAdapt(false);
+        }
     });
-    connect(m_viewB, &ImageView::showScaleLabel, this, [=](){
+    connect(m_viewB, &ImageView::showScaleLabel, this, [ = ]() {
         scalePerc->show();
         hideT->start(1000);
-    });
-    connect(dApp->viewerTheme, &ViewerThemeManager::viewerThemeChanged, this,
-            [=](ViewerThemeManager::AppTheme theme) {
-        if (theme == ViewerThemeManager::Dark) {
-            scalePerc->setStyleSheet(getFileContent(":/resources/dark/qss/floating.qss"));
-        } else {
-            scalePerc->setStyleSheet(getFileContent(":/resources/light/qss/floating.qss"));
-        }
     });
 }
 
 void ViewPanel::initNavigation()
 {
     m_nav = new NavigationWidget(this);
-    m_nav.setAnchor(Qt::AnchorRight, this, Qt::AnchorRight);
+    m_nav.setBottomMargin(100);
+    m_nav.setLeftMargin(10);
+    m_nav.setAnchor(Qt::AnchorLeft, this, Qt::AnchorLeft);
     m_nav.setAnchor(Qt::AnchorBottom, this, Qt::AnchorBottom);
 
-    connect(this, &ViewPanel::imageChanged, this, [=] (const QString &path) {
+    connect(this, &ViewPanel::imageChanged, this, [ = ](const QString & path, DBImgInfoList infos) {
         if (path.isEmpty()) m_nav->setVisible(false);
         m_nav->setImage(m_viewB->image());
     });
-    connect(m_nav, &NavigationWidget::requestMove, [this](int x, int y){
+    connect(m_nav, &NavigationWidget::requestMove, [this](int x, int y) {
         m_viewB->centerOn(x, y);
     });
-    connect(m_viewB, &ImageView::transformChanged, [this](){
+    connect(m_viewB, &ImageView::transformChanged, [this]() {
         m_nav->setVisible(! m_nav->isAlwaysHidden() && ! m_viewB->isWholeImageVisible());
         m_nav->setRectInImage(m_viewB->visibleImageRect());
     });
-    connect(m_viewB, &ImageView::hideNavigation, this, [=]() {
+    connect(dApp->signalM, &SignalManager::hideNavigation, this, [ = ]() {
         m_nav->setVisible(false);
     });
 }

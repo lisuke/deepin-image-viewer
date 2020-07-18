@@ -25,8 +25,9 @@
 #include <QMouseEvent>
 #include <QGraphicsDropShadowEffect>
 #include <QtDebug>
-
-#include <dthememanager.h>
+#include <DDialogCloseButton>
+#include <DGuiApplicationHelper>
+#include <QRgb>
 
 namespace {
 
@@ -34,6 +35,12 @@ const QString SETTINGS_GROUP = "VIEWPANEL";
 const QString SETTINGS_ALWAYSHIDDEN_KEY = "NavigationAlwaysHidden";
 const int IMAGE_MARGIN = 5;
 const int IMAGE_MARGIN_BOTTOM = 5;
+const QString ICON_CLOSE_NORMAL_LIGHT = ":/resources/light/images/button_tab_close_normal 2.svg";
+const QString ICON_CLOSE_HOVER_LIGHT = ":/resources/light/images/button_tab_close_hover 2.svg";
+const QString ICON_CLOSE_PRESS_LIGHT = ":/resources/light/images/button_tab_close_press 2.svg";
+const QString ICON_CLOSE_NORMAL_DARK = ":/resources/dark/images/button_tab_close_normal 3.svg";
+const QString ICON_CLOSE_HOVER_DARK = ":/resources/dark/images/button_tab_close_hover 3.svg";
+const QString ICON_CLOSE_PRESS_DARK = ":/resources/dark/images/button_tab_close_press 3.svg";
 
 }  // namespace
 
@@ -45,23 +52,68 @@ NavigationWidget::NavigationWidget(QWidget *parent)
     hide();
     resize(150, 112);
     onThemeChanged(dApp->viewerTheme->getCurrentTheme());
-    ImageButton *closeBtn = new ImageButton(":/resources/common/close_normal.png",
-                                            ":/resources/common/close_hover.png",
-                                            ":/resources/common/close_press.png",
-                                            ":/resources/common/close_normal.png", this);
-    closeBtn->setTooltipVisible(true);
-    closeBtn->setFixedSize(27, 23);
-    closeBtn->move(QPoint(this->x() + this->width() - 27 - 6,
-                   rect().topRight().y() + 4));
-    closeBtn->show();
-    connect(closeBtn, &ImageButton::clicked, [this](){
+
+    ImageButton *closeBtn_light = new ImageButton(ICON_CLOSE_NORMAL_LIGHT, ICON_CLOSE_HOVER_LIGHT, ICON_CLOSE_PRESS_LIGHT, " ", this);
+    closeBtn_light->setTooltipVisible(true);
+    closeBtn_light->setFixedSize(32, 32);
+    closeBtn_light->move(QPoint(this->x() + this->width() - 27 - 6,
+                                rect().topRight().y() + 4 - 6));
+    DPalette palette1 ;
+    palette1.setColor(DPalette::Background, QColor(0, 0, 0, 1));
+    closeBtn_light->setPalette(palette1);
+    closeBtn_light->hide();
+    connect(closeBtn_light, &ImageButton::clicked, [this]() {
         setAlwaysHidden(true);
+    });
+
+    ImageButton *closeBtn_dark = new ImageButton(ICON_CLOSE_NORMAL_DARK, ICON_CLOSE_HOVER_DARK, ICON_CLOSE_PRESS_DARK, " ", this);
+    closeBtn_dark->setTooltipVisible(true);
+    closeBtn_dark->setFixedSize(32, 32);
+    closeBtn_dark->move(QPoint(this->x() + this->width() - 27 - 6,
+                               rect().topRight().y() + 4 - 6));
+    DPalette palette2 ;
+    palette2.setColor(DPalette::Background, QColor(0, 0, 0, 1));
+    closeBtn_dark->setPalette(palette2);
+    closeBtn_dark->hide();
+    connect(closeBtn_dark, &ImageButton::clicked, [this]() {
+        setAlwaysHidden(true);
+    });
+
+    DGuiApplicationHelper::ColorType themeType = DGuiApplicationHelper::instance()->themeType();
+    if (themeType == DGuiApplicationHelper::DarkType) {
+        closeBtn_light->hide();
+        closeBtn_dark->show();
+    } else {
+        closeBtn_dark->hide();
+        closeBtn_light->show();
+    }
+
+    QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ]() {
+        DGuiApplicationHelper::ColorType themeType = DGuiApplicationHelper::instance()->themeType();
+        if (themeType == DGuiApplicationHelper::DarkType) {
+            closeBtn_light->hide();
+            closeBtn_dark->show();
+            m_bgImgUrl = utils::view::naviwindow::DARK_BG_IMG ;
+            m_BgColor = utils::view::naviwindow::DARK_BG_COLOR;
+            m_mrBgColor = utils::view::naviwindow::DARK_MR_BG_COLOR;
+            m_mrBorderColor = utils::view::naviwindow::DARK_MR_BORDER_Color;
+            m_imgRBorderColor = utils::view::naviwindow:: DARK_IMG_R_BORDER_COLOR;
+        } else {
+            closeBtn_dark->hide();
+            closeBtn_light->show();
+            m_bgImgUrl = utils::view::naviwindow::LIGHT_BG_IMG ;
+            m_BgColor = utils::view::naviwindow::LIGHT_BG_COLOR;
+            m_mrBgColor = utils::view::naviwindow::LIGHT_MR_BG_COLOR;
+            m_mrBorderColor = utils::view::naviwindow::LIGHT_MR_BORDER_Color;
+            m_imgRBorderColor = utils::view::naviwindow::LIGHT_IMG_R_BORDER_COLOR;
+        }
     });
 
     m_mainRect = QRect(rect().x() + IMAGE_MARGIN,
                        rect().y() + IMAGE_MARGIN_BOTTOM,
-                       rect().width() - IMAGE_MARGIN*2,
-                       rect().height() - IMAGE_MARGIN_BOTTOM*2);
+                       rect().width() - IMAGE_MARGIN * 2,
+                       rect().height() - IMAGE_MARGIN_BOTTOM * 2);
+
 
     connect(dApp->viewerTheme, &ViewerThemeManager::viewerThemeChanged, this,
             &NavigationWidget::onThemeChanged);
@@ -80,7 +132,12 @@ void NavigationWidget::setAlwaysHidden(bool value)
 bool NavigationWidget::isAlwaysHidden() const
 {
     return dApp->setter->value(SETTINGS_GROUP, SETTINGS_ALWAYSHIDDEN_KEY,
-                              QVariant(false)).toBool();
+                               QVariant(false)).toBool();
+}
+
+QPoint NavigationWidget::transImagePos(QPoint pos)
+{
+    return pos - QPoint(imageDrawRect.x(), imageDrawRect.y());
 }
 
 void NavigationWidget::setImage(const QImage &img)
@@ -88,22 +145,34 @@ void NavigationWidget::setImage(const QImage &img)
     const qreal ratio = devicePixelRatioF();
 
     QRect tmpImageRect = QRect(m_mainRect.x(), m_mainRect.y(),
-                               m_mainRect.width(), m_mainRect.height());
-
+                               qRound(m_mainRect.width() * ratio),
+                               qRound(m_mainRect.height() * ratio));
+//    QRect tmpImageRect = m_mainRect;
 
     m_originRect = img.rect();
-    m_img = img.scaled(tmpImageRect.size() * ratio, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    m_img.setDevicePixelRatio(ratio);
-    m_pix = QPixmap::fromImage(m_img);
-    m_pix.setDevicePixelRatio(ratio);
 
-    if (img.width() > img.height()) {
-        m_imageScale = qreal(m_img.width() / ratio)/qreal(img.width());
+    // 只在图片比可显示区域大时才缩放
+    if (tmpImageRect.width() < m_originRect.width() || tmpImageRect.height() < m_originRect.height()) {
+        m_img = img.scaled(tmpImageRect.size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     } else {
-        m_imageScale = qreal(m_img.height() / ratio)/qreal(img.height());
+        m_img = img;
     }
 
-    m_r = QRect(0, 0, m_img.width() / ratio, m_img.height() / ratio);
+    m_pix = QPixmap::fromImage(m_img);
+    m_pix.setDevicePixelRatio(ratio);
+    m_imageScale = qMax(1.0, qMax(qreal(img.width()) / qreal(m_img.width()), qreal(img.height()) / qreal(m_img.height())));
+//    m_r = QRectF(0, 0, m_img.width() / ratio, m_img.height() / ratio);
+//    m_widthScale = img.width() / m_img.width();
+//    m_heightScale = img.height() / m_img.height();
+
+    m_r = QRectF(0, 0, m_img.width(), m_img.height());
+
+
+
+    imageDrawRect = QRect((m_mainRect.width() - m_img.width() / ratio) / 2 + IMAGE_MARGIN,
+                          (m_mainRect.height() - m_img.height() / ratio) / 2 + utils::common::BORDER_WIDTH,
+                          m_img.width() / ratio, m_img.height() / ratio);
+
     update();
 }
 
@@ -111,39 +180,86 @@ void NavigationWidget::setRectInImage(const QRect &r)
 {
     if (m_img.isNull())
         return;
-    m_r.setX((qreal)r.x() * m_imageScale);
-    m_r.setY((qreal)r.y() * m_imageScale);
-    m_r.setWidth((qreal)r.width() * m_imageScale);
-    m_r.setHeight((qreal)r.height() * m_imageScale);
-    update();
+    m_r.setX(qreal(r.x()) / m_imageScale);
+    m_r.setY(qreal(r.y()) / m_imageScale);
+    m_r.setWidth(qreal(r.width()) / m_imageScale);
+    m_r.setHeight(qreal(r.height()) / m_imageScale);
 
-    // x == 0并且y == 0时表示图片未超出窗口区域
-    if (!isAlwaysHidden())
-        setVisible(r.x() !=0 || r.y() != 0);
+    update();
 }
 
 void NavigationWidget::mousePressEvent(QMouseEvent *e)
 {
     if (e->button() == Qt::LeftButton)
-        tryMoveRect(e->pos());
+        tryMoveRect(transImagePos(e->pos()));
 }
 
 void NavigationWidget::mouseMoveEvent(QMouseEvent *e)
 {
-    tryMoveRect(e->pos());
+    tryMoveRect(transImagePos(e->pos()));
 }
 
 void NavigationWidget::tryMoveRect(const QPoint &p)
 {
-    const int x0 = (m_mainRect.width()-m_img.width())/2;
-    const int y0 = (m_mainRect.height()-m_img.height())/2;
-    const QRect imageRect(x0, y0, m_img.width(), m_img.height());
-    if (! imageRect.contains(p))
+//    int x0 = (m_mainRect.width() - m_img.width()) / 2 / devicePixelRatioF();
+//    int y0 = (m_mainRect.height() - m_img.height()) / 2 / devicePixelRatioF();
+//    const QRect imageRect(x0, y0, m_img.width(), m_img.height());
+//    if (! imageRect.contains(p))
+//        return;
+
+    if (!m_mainRect.contains(p))
         return;
-    const qreal x = 1.0 * (p.x() - x0) / m_img.width() * m_originRect.width();
-    const qreal y = 1.0 * (p.y() - y0) / m_img.height() * m_originRect.height();
+
+//    const qreal x = 1.0 * (p.x() / devicePixelRatioF() - x0) / m_img.width() * m_originRect.width();
+//    const qreal y = 1.0 * (p.y() / devicePixelRatioF() - y0) / m_img.height() * m_originRect.height();
+    qreal x = p.x() * m_imageScale;
+    qreal y = p.y() * m_imageScale;
+
+//    qDebug() << p ;
+//    qDebug() << x << y;
+//    qDebug() << m_r;
+
 
     Q_EMIT requestMove(x, y);
+}
+
+bool NavigationWidget::checkbgisdark(QImage &img) const
+{
+    //long l = m_r.toRect().width() * m_r.toRect().height() / 100;
+    int npixcntx, npixcnty;
+    bool numlessflag;
+    m_r.toRect().width() * m_r.toRect().height() < 50 ? numlessflag = true : numlessflag = false;
+    if (numlessflag) {
+        npixcntx = m_r.toRect().width();
+        npixcnty = m_r.toRect().height();
+    } else {
+        npixcntx = m_r.toRect().width() / 5;
+        npixcnty = m_r.toRect().height() / 5;
+    }
+    int total = 0;
+    int darktotal = 0;
+    for (int i = 0; i < npixcntx; i++) {
+        for (int j = 0; j < npixcnty; j++) {
+            total++;
+            QRgb rgb;
+            if (numlessflag)
+                rgb = img.pixel(m_r.toRect().x(), m_r.toRect().y());
+            else {
+                rgb = img.pixel(m_r.toRect().x() + 5 * i, m_r.toRect().y() + 5 * j);
+            }
+            int red = qRed(rgb);
+            int green = qGreen(rgb);
+            int blue = qGreen(rgb);
+            int gray = (red * 30 + green * 59 + blue * 11) / 100;
+            if (gray < 25) {
+                darktotal++;
+            }
+        }
+    }
+    if (darktotal / (total * 1.00) > 0.95)
+        return  true;
+    else
+        return false;
 }
 
 void NavigationWidget::paintEvent(QPaintEvent *)
@@ -158,21 +274,21 @@ void NavigationWidget::paintEvent(QPaintEvent *)
     const qreal ratio = devicePixelRatioF();
 
     QPainter p(&img);
-    p.setRenderHints(QPainter::Antialiasing|QPainter::HighQualityAntialiasing);
-    p.setRenderHint(QPainter::SmoothPixmapTransform);
-    p.setClipRegion(QRegion(0, 0, img.width() / ratio, img.height() / ratio) - m_r);
-    p.fillRect(QRect(0, 0, m_img.width() / ratio, m_img.height() / ratio), m_mrBgColor);
-    p.setPen(m_mrBorderColor);
+    p.fillRect(m_r, m_mrBgColor);
+//    p.setPen(m_mrBorderColor);
+    if (checkbgisdark(img)) {
+        p.setPen(QPen(Qt::gray));
+    } else {
+        p.setPen(QColor(0, 0, 0, 0));
+    }
+
+//    p.setPen(QPen(Qt::green));
     p.drawRect(m_r);
     p.end();
     p.begin(this);
-
     QImage background(m_bgImgUrl);
-
     p.drawImage(this->rect(), background);
-    QRect imageDrawRect =  QRect((m_mainRect.width() - m_img.width() / ratio)/2 + IMAGE_MARGIN,
-                (m_mainRect.height() - m_img.height() / ratio)/2 + utils::common::BORDER_WIDTH,
-                                 m_img.width() / ratio, m_img.height() / ratio);
+
     //**draw transparent background
 //    QPixmap pm(12, 12);
 //    QPainter pmp(&pm);
@@ -186,28 +302,28 @@ void NavigationWidget::paintEvent(QPaintEvent *)
 
 //    p.fillRect(imageDrawRect, QBrush(pm));
     p.drawImage(imageDrawRect, img);
-    QRect borderRect = QRect(imageDrawRect.x(), imageDrawRect.y(), imageDrawRect.width()
-          - utils::common::BORDER_WIDTH, imageDrawRect.height() - utils::common::BORDER_WIDTH);
-    p.setPen(m_imgRBorderColor);
+    QRect borderRect = QRect(imageDrawRect.x(), imageDrawRect.y() + 1, imageDrawRect.width(), imageDrawRect.height() + 1);
+//    p.setPen(m_imgRBorderColor);
+    p.setPen(QColor(0, 0, 0, 0));
+    //p.setPen(QPen(Qt::red));
     p.drawRect(borderRect);
     p.end();
 }
 
-void NavigationWidget::onThemeChanged(ViewerThemeManager::AppTheme theme) {
+void NavigationWidget::onThemeChanged(ViewerThemeManager::AppTheme theme)
+{
     if (theme == ViewerThemeManager::Dark) {
         m_bgImgUrl = utils::view::naviwindow::DARK_BG_IMG ;
         m_BgColor = utils::view::naviwindow::DARK_BG_COLOR;
         m_mrBgColor = utils::view::naviwindow::DARK_MR_BG_COLOR;
         m_mrBorderColor = utils::view::naviwindow::DARK_MR_BORDER_Color;
-        m_imgRBorderColor =utils::view::naviwindow:: DARK_IMG_R_BORDER_COLOR;
-        Dtk::Widget::DThemeManager::instance()->setTheme("dark");
+        m_imgRBorderColor = utils::view::naviwindow:: DARK_IMG_R_BORDER_COLOR;
     } else {
         m_bgImgUrl = utils::view::naviwindow::LIGHT_BG_IMG ;
         m_BgColor = utils::view::naviwindow::LIGHT_BG_COLOR;
         m_mrBgColor = utils::view::naviwindow::LIGHT_MR_BG_COLOR;
         m_mrBorderColor = utils::view::naviwindow::LIGHT_MR_BORDER_Color;
         m_imgRBorderColor = utils::view::naviwindow::LIGHT_IMG_R_BORDER_COLOR;
-        Dtk::Widget::DThemeManager::instance()->setTheme("light");
     }
     update();
 }

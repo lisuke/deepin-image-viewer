@@ -1,3 +1,63 @@
+<a name="1.3.17"></a>
+## 1.3.17 (2019-06-11)
+
+
+#### Bug Fixes
+
+*   use QPrintPropertiesDialog replace QPageSetupDialog ([0c7fe450](https://github.com/linuxdeepin/deepin-image-viewer/commit/0c7fe450f7dc7048bb7334620eadf26cb2064bfe))
+
+
+
+<a name="1.3.14"></a>
+## 1.3.14 (2019-05-23)
+
+
+#### Features
+
+*   remember last choosed path ([5c78c745](https://github.com/linuxdeepin/deepin-image-viewer/commit/5c78c74523f09623248e8c398402815cc2582d9f))
+
+#### Others
+
+*   remove unused code ([d0ecd9f3](https://github.com/linuxdeepin/deepin-image-viewer/commit/d0ecd9f31acd42cb977cf39a912e64fe78257c54))
+
+
+
+<a name="1.3.13"></a>
+## 1.3.13 (2019-04-19)
+
+
+#### Bug Fixes
+
+*   can not copy images to windows applications ([539b68d6](https://github.com/linuxdeepin/deepin-image-viewer/commit/539b68d6017d6c3de5f7bc26465057065777377a))
+
+
+
+<a name="1.3.12"></a>
+### 1.3.12 (2019-04-16)
+
+
+#### Bug Fixes
+
+*   not using color printing even if printers supports it ([560e3350](https://github.com/linuxdeepin/deepin-image-viewer/commit/560e3350e4419a0891290251c8304ba5ec393fd4))
+
+
+
+<a name="1.3.11"></a>
+## 1.3.11 (2019-04-10)
+
+
+#### Bug Fixes
+
+*   #16; QSqlDatabase and QSqlQuery thread-safety problem, used QMutexLocker; DBManager (#17) ([f0e9ff83](https://github.com/linuxdeepin/deepin-image-viewer/commit/f0e9ff83e58b3431670aa78a338d1f87011e3d0c))
+
+#### Others
+
+*   auto pull translation files from transifex ([c22ddcf0](https://github.com/linuxdeepin/deepin-image-viewer/commit/c22ddcf079a5f0d247ac9acb0d21c97b7c0c531f))
+*   improve english ([f17bee54](https://github.com/linuxdeepin/deepin-image-viewer/commit/f17bee54e689e123c95bebce18f3c70fc62b6f58))
+*   translation update. (#37) ([3ae7b257](https://github.com/linuxdeepin/deepin-image-viewer/commit/3ae7b257f4f6596bfecf5e53f70f3d1ea30139b8))
+
+
+
 <a name="1.3.10"></a>
 ## 1.3.10 (2019-03-27)
 

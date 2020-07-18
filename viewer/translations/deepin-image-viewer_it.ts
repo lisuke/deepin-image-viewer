@@ -1,142 +1,16 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="it" version="2.1">
-<context>
-    <name>AboutDialog</name>
-    <message>
-        <source>Deepin Image Viewer</source>
-        <translation>Deepin Image Viewer</translation>
-    </message>
-    <message>
-        <source>Version:</source>
-        <translation>Versione:</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumBTContent</name>
-    <message>
-        <source>image</source>
-        <translation>immagine</translation>
-    </message>
-    <message>
-        <source>images</source>
-        <translation>immagini</translation>
-    </message>
-    <message>
-        <source>album</source>
-        <translation>album</translation>
-    </message>
-    <message>
-        <source>albums</source>
-        <translation>albums</translation>
-    </message>
-    <message>
-        <source>Manage sync</source>
-        <translation>Gestisci sincronizzazione</translation>
-    </message>
-    <message>
-        <source>Syncing: </source>
-        <translation>Sincronizzazione:</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumCreateDialog</name>
-    <message>
-        <source>Cancel</source>
-        <translation>Cancella</translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>New album</source>
-        <translation>Nuovo album</translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation>Senza nome</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumDelegate</name>
-    <message>
-        <source>Recent imported</source>
-        <translation>Importati di recente</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Le mie preferite</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumDeleteDialog</name>
-    <message>
-        <source>Are your sure to delete this album?</source>
-        <translation>Sicuro di voler eliminare questo album?</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Cancella</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Elimina</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumPanel</name>
-    <message>
-        <source>Back</source>
-        <translation>Indietro</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Le mie preferite</translation>
-    </message>
-    <message>
-        <source>Timeline</source>
-        <translation>Timeline</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Aggiungi</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Puoi aggiungere la cartella da sincronizzare o effettuare il drag&amp;drop delle immagini nella timeline</translation>
-    </message>
-</context>
-<context>
-    <name>AlbumsView</name>
-    <message>
-        <source>Unnamed</source>
-        <translation>Senza nome</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Visualizza</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Presentazione</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation>Rinomina</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Copia</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Elimina</translation>
-    </message>
-</context>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="it">
 <context>
     <name>Application</name>
     <message>
-        <source>Deepin Image Viewer</source>
-        <translation>Deepin Image Viewer</translation>
+        <source>Image Viewer</source>
+        <translation>Image Viewer</translation>
+    </message>
+    <message>
+        <source>Image Viewer is an image viewing tool with fashion interface and smooth performance.</source>
+        <translation>Deepin Image Viewer è un gestore di immagini elegante e veloce.
+Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     </message>
 </context>
 <context>
@@ -147,71 +21,25 @@
     </message>
 </context>
 <context>
-    <name>DirImportDialog</name>
+    <name>ExtensionPanel</name>
     <message>
-        <source>Cancel</source>
-        <translation>Annulla</translation>
+        <source>Image info</source>
+        <translation>Info immagine</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Are you sure to add the pictures to the album?</source>
-        <translation>Sicuro di voler aggiungere le immagini all&apos;album?</translation>
-    </message>
-    <message>
-        <source>Sync and Create</source>
-        <translation>Sincronizza e crea</translation>
-    </message>
-    <message>
-        <source>Sync</source>
-        <translation>Sincronizza</translation>
-    </message>
-    <message>
-        <source>Are you sure to add to the sync list and create the album named after this folder?</source>
-        <translation>Sicuro di voler aggiungere la lista e creare l&apos;album rinominandolo?</translation>
-    </message>
-</context>
-<context>
-    <name>Exporter</name>
-    <message>
-        <source>JPEG(*.bmp *.gif *.jpg; *.jpeg; *.png *.pbm;*.pgm *.ppm *.xbm *.xpm *.svg *.dds *.icns*.jp2 *.mng *.tga *.tiff *.wbmp *.webp;)</source>
-        <translation>JPEG(*.bmp *.gif *.jpg; *.jpeg; *.png *.pbm;*.pgm *.ppm *.xbm *.xpm *.svg *.dds *.icns*.jp2 *.mng *.tga *.tiff *.wbmp *.webp;)</translation>
-    </message>
-    <message>
-        <source>Exported successfully</source>
-        <translation>Esportazione riuscita</translation>
-    </message>
-    <message>
-        <source>Failed to export</source>
-        <translation>Esportazione fallita</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Salva</translation>
-    </message>
-</context>
-<context>
-    <name>FileDeleteDialog</name>
-    <message>
-        <source>Are you sure to throw pictures to TRASH?</source>
-        <translation>Sicuro di voler eliminare le immagini?</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Annulla</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Elimina</translation>
+        <source>Alt+Return</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ImageInfoWidget</name>
     <message>
-        <source>Image info</source>
-        <translation>Info immagine</translation>
+        <source>Basic info</source>
+        <translation>Info base</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation>Dettagli</translation>
     </message>
 </context>
 <context>
@@ -219,85 +47,6 @@
     <message>
         <source>This file contains multiple pages, please use Evince to view all pages.</source>
         <translation>Questo file contiene più pagine, utilizza Evince per visualizzarle tutte.</translation>
-    </message>
-</context>
-<context>
-    <name>ImagesView</name>
-    <message>
-        <source>View</source>
-        <translation>Visualizza</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation>Schermo intero</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Presentazione</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Stampa</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Copia</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Copia negli appunti</translation>
-    </message>
-    <message>
-        <source>Remove from album</source>
-        <translation>Rimuovi dall&apos;album</translation>
-    </message>
-    <message>
-        <source>Favorite</source>
-        <translation>Preferita</translation>
-    </message>
-    <message>
-        <source>Unfavorite</source>
-        <translation>Elimina dai preferiti</translation>
-    </message>
-    <message>
-        <source>Rotate clockwise</source>
-        <translation>Ruota in senso orario</translation>
-    </message>
-    <message>
-        <source>Rotate counterclockwise</source>
-        <translation>Ruota in senso antiorario</translation>
-    </message>
-    <message>
-        <source>Set as wallpaper</source>
-        <translation>Imposta come wallpaper</translation>
-    </message>
-    <message>
-        <source>Display in file manager</source>
-        <translation>Visualizza nel file manager</translation>
-    </message>
-    <message>
-        <source>Image info</source>
-        <translation>Info immagine</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Aggiungi</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Puoi aggiungere la cartella da sincronizzare o effettuare il drag&amp;drop delle immagini nella timeline</translation>
-    </message>
-    <message>
-        <source>Add to album</source>
-        <translation>Aggiungi ad un album esistente</translation>
-    </message>
-    <message>
-        <source>Add to new album</source>
-        <translation>Aggiungi in un nuovo album</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Elimina</translation>
     </message>
 </context>
 <context>
@@ -315,6 +64,21 @@
     </message>
 </context>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <source>Cancel</source>
+        <translation>Annulla</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Elimina</translation>
+    </message>
+    <message>
+        <source>Image file not found</source>
+        <translation type="unfinished">File immagine non trovato</translation>
+    </message>
+</context>
+<context>
     <name>MetadataName</name>
     <message>
         <source>Name</source>
@@ -323,10 +87,6 @@
     <message>
         <source>Type</source>
         <translation>Tipo</translation>
-    </message>
-    <message>
-        <source>Date photoed</source>
-        <translation>Data scatto</translation>
     </message>
     <message>
         <source>Date modified</source>
@@ -341,8 +101,8 @@
         <translation>Dimensione file</translation>
     </message>
     <message>
-        <source>Colorspace</source>
-        <translation>Spettro colore</translation>
+        <source>Date captured</source>
+        <translation>Data dell&apos;immagine</translation>
     </message>
     <message>
         <source>Exposure mode</source>
@@ -389,12 +149,24 @@
         <translation>Compensazione flash</translation>
     </message>
     <message>
+        <source>Lens model</source>
+        <translation>Modello lente</translation>
+    </message>
+    <message>
+        <source>Colorspace</source>
+        <translation>Spettro colore</translation>
+    </message>
+    <message>
         <source>Camera model</source>
         <translation>Modello device</translation>
     </message>
     <message>
-        <source>Lens model</source>
-        <translation>Modello lente</translation>
+        <source>Dimensions</source>
+        <translation>Dimensione</translation>
+    </message>
+    <message>
+        <source>Tag</source>
+        <translation>Tag</translation>
     </message>
 </context>
 <context>
@@ -464,6 +236,10 @@
     <message>
         <source>Ring</source>
         <translation>Ring</translation>
+    </message>
+    <message>
+        <source>yyyy/MM/dd HH:mm:dd</source>
+        <translation>yyyy/MM/dd HH:mm:dd</translation>
     </message>
 </context>
 <context>
@@ -607,16 +383,28 @@
         <translation>Aiuto</translation>
     </message>
     <message>
-        <source>Exit</source>
-        <translation>Esci</translation>
-    </message>
-    <message>
         <source>Display shortcuts</source>
         <translation>Visualizza scorciatoie</translation>
     </message>
     <message>
         <source>Delete</source>
         <translation>Elimina</translation>
+    </message>
+    <message>
+        <source>Exit fullscreen</source>
+        <translation>Esci dalla modalità schermo intero</translation>
+    </message>
+    <message>
+        <source>Zoom in</source>
+        <translation>Aumenta zoom</translation>
+    </message>
+    <message>
+        <source>Zoom out</source>
+        <translation>Diminuisci zoom</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Apri</translation>
     </message>
 </context>
 <context>
@@ -717,17 +505,6 @@
     </message>
 </context>
 <context>
-    <name>SlideShowPanel</name>
-    <message>
-        <source>End show</source>
-        <translation>Termina presentazione</translation>
-    </message>
-    <message>
-        <source>Pause/Play</source>
-        <translation>Pausa/Avvia</translation>
-    </message>
-</context>
-<context>
     <name>SlideshowFrame</name>
     <message>
         <source>Slide Settings</source>
@@ -748,6 +525,41 @@
     <message>
         <source>second</source>
         <translation>secondi</translation>
+    </message>
+</context>
+<context>
+    <name>TTBContent</name>
+    <message>
+        <source>My favorite</source>
+        <translation>Le mie preferite</translation>
+    </message>
+    <message>
+        <source>Previous</source>
+        <translation>Precedente</translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <translation>Successiva</translation>
+    </message>
+    <message>
+        <source>1:1 Size</source>
+        <translation>Scala 1:1</translation>
+    </message>
+    <message>
+        <source>Fit to window</source>
+        <translation>Adatta alla finestra</translation>
+    </message>
+    <message>
+        <source>Rotate counterclockwise</source>
+        <translation>Ruota in senso antiorario</translation>
+    </message>
+    <message>
+        <source>Rotate clockwise</source>
+        <translation>Ruota in senso orario</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
@@ -803,103 +615,9 @@
         <source>Open Image</source>
         <translation>Apri immagine</translation>
     </message>
-</context>
-<context>
-    <name>TimelineBTContent</name>
     <message>
-        <source>%1 image</source>
-        <translation>%1 immagine</translation>
-    </message>
-    <message>
-        <source>%1 images</source>
-        <translation>%1 immagini</translation>
-    </message>
-    <message>
-        <source>Manage sync</source>
-        <translation>Gestisci sincronizzazione</translation>
-    </message>
-    <message>
-        <source>Syncing: </source>
-        <translation>Sincronizzazione:</translation>
-    </message>
-</context>
-<context>
-    <name>TimelinePanel</name>
-    <message>
-        <source>Album</source>
-        <translation>Album</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Aggiungi</translation>
-    </message>
-    <message>
-        <source>You can add sync directory or drag and drop  images to timeline</source>
-        <translation>Puoi aggiungere la cartella da sincronizzare o effettuare il drag&amp;drop delle immagini nella timeline</translation>
-    </message>
-    <message>
-        <source>Add to album</source>
-        <translation>Aggiungi ad un album esistente</translation>
-    </message>
-    <message>
-        <source>Add to new album</source>
-        <translation>Aggiungi in un nuovo album</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation>Visualizza</translation>
-    </message>
-    <message>
-        <source>Fullscreen</source>
-        <translation>Schermo intero</translation>
-    </message>
-    <message>
-        <source>Slide show</source>
-        <translation>Presentazione</translation>
-    </message>
-    <message>
-        <source>Print</source>
-        <translation>Stampa</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation>Copia</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Copia negli appunti</translation>
-    </message>
-    <message>
-        <source>Favorite</source>
-        <translation>Preferita</translation>
-    </message>
-    <message>
-        <source>Unfavorite</source>
-        <translation>Elimina dai preferiti</translation>
-    </message>
-    <message>
-        <source>Rotate clockwise</source>
-        <translation>Ruota in senso orario</translation>
-    </message>
-    <message>
-        <source>Rotate counterclockwise</source>
-        <translation>Ruota in senso antiorario</translation>
-    </message>
-    <message>
-        <source>Set as wallpaper</source>
-        <translation>Imposta come sfondo</translation>
-    </message>
-    <message>
-        <source>Display in file manager</source>
-        <translation>Visualizza nel file manager</translation>
-    </message>
-    <message>
-        <source>Image info</source>
-        <translation>Info immagine</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Elimina</translation>
+        <source>Image file not found</source>
+        <translation>File immagine non trovato</translation>
     </message>
 </context>
 <context>
@@ -930,21 +648,6 @@
     </message>
 </context>
 <context>
-    <name>TopAlbumTips</name>
-    <message>
-        <source>dd MMMM yyyy</source>
-        <translation>dd MMMM yyyy</translation>
-    </message>
-    <message>
-        <source>My favorite</source>
-        <translation>Le mie preferite</translation>
-    </message>
-    <message>
-        <source>Recent imported</source>
-        <translation>Importati di recente</translation>
-    </message>
-</context>
-<context>
     <name>TopToolbar</name>
     <message>
         <source>New album</source>
@@ -953,23 +656,6 @@
     <message>
         <source>Settings</source>
         <translation>Impostazioni</translation>
-    </message>
-    <message>
-        <source>Deepin Image Viewer is a fashion &amp; smooth image manager.</source>
-        <translation>Deepin Image Viewer è un gestore immagini bello e veloce.</translation>
-    </message>
-    <message>
-        <source>It is featured with image management, image viewing and basic image editing.</source>
-        <translation>Fornisce una gestione delle immagini, la loro visualizzazione ed un editing base.</translation>
-    </message>
-    <message>
-        <source>Dark theme</source>
-        <translation>Tema scuro</translation>
-    </message>
-    <message>
-        <source>Deepin Image Viewer is an image viewing tool with fashion interface and smooth performance.</source>
-        <translation>Deepin Image Viewer è un gestore di immagini elegante e veloce.
-Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     </message>
 </context>
 <context>
@@ -1005,10 +691,6 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     <message>
         <source>Copy</source>
         <translation>Copia</translation>
-    </message>
-    <message>
-        <source>Copy to clipboard</source>
-        <translation>Copia negli appunti</translation>
     </message>
     <message>
         <source>Remove from album</source>

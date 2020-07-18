@@ -48,8 +48,10 @@ const int BORDER_WIDTH = 1;
 const int BORDER_WIDTH_SELECTED = 2;
 const int THUMBNAIL_MAX_SCALE_SIZE = 192;
 
-const QColor DARK_BACKGROUND_COLOR = QColor("#202020");
-const QColor LIGHT_BACKGROUND_COLOR = QColor("#FFFFFF");
+//const QColor DARK_BACKGROUND_COLOR = QColor("#202020");
+//const QColor LIGHT_BACKGROUND_COLOR = QColor("#FFFFFF");
+const QColor DARK_BACKGROUND_COLOR = QColor("#252525");
+const QColor LIGHT_BACKGROUND_COLOR = QColor("#F8F8F8");
 
 const QColor LIGHT_CHECKER_COLOR = QColor("#FFFFFF");
 const QColor DARK_CHECKER_COLOR = QColor("#CCCCCC");
@@ -115,13 +117,13 @@ const QString DARK_LOADINGICON =
 const QString LIGHT_LOADINGICON =
         ":/resources/light/images/light_loading.gif";
     namespace naviwindow {
-        const QString DARK_BG_IMG = ":/resources/dark/images/naviwindow_bg.png";
+        const QString DARK_BG_IMG = ":/resources/dark/images/naviwindow_bg.svg";
         const QColor DARK_BG_COLOR = QColor(0, 0, 0, 100);
         const QColor DARK_MR_BG_COLOR = QColor(0, 0, 0, 150);
         const QColor DARK_MR_BORDER_Color = QColor(255, 255, 255, 80);
         const QColor DARK_IMG_R_BORDER_COLOR = QColor(255, 255, 255, 50);
 
-        const QString LIGHT_BG_IMG = ":/resources/light/images/naviwindow_bg.png";
+        const QString LIGHT_BG_IMG = ":/resources/light/images/naviwindow_bg.svg";
         const QColor LIGHT_BG_COLOR = QColor(255, 255, 255, 104);
         const QColor LIGHT_MR_BG_COLOR = QColor(0, 0, 0, 101);
         const QColor LIGHT_MR_BORDER_Color = QColor(255, 255, 255, 80);
@@ -138,8 +140,10 @@ void        showInFileManager(const QString &path);
 int         stringWidth(const QFont &f, const QString &str);
 int         stringHeight(const QFont &f, const QString &str);
 
+QPixmap     renderSVG(const QString &filePath, const QSize &size);
 QString     hash(const QString &str);
 QString     wrapStr(const QString &str, const QFont &font, int maxWidth);
+QString     SpliteText(const QString& text,const QFont &font,int nLabelSize);
 QString     sizeToHuman(const qlonglong bytes);
 QString     timeToString(const QDateTime &time, bool normalFormat = false);
 QDateTime   stringToDateTime(const QString &time);

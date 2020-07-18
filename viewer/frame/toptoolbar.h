@@ -23,21 +23,27 @@
 
 #include <QJsonObject>
 #include <QPointer>
+#include <DTitlebar>
+#include <DLabel>
+#include <QGraphicsDropShadowEffect>
+#include <DMenu>
+#include <DShadowLine>
 
 DWIDGET_USE_NAMESPACE
 
 class SettingsWindow;
 class QHBoxLayout;
 class QProcess;
-class QMenu;
 
-class TopToolbar : public BlurFrame
+class TopToolbar : public DBlurEffectWidget
 {
     Q_OBJECT
 public:
     TopToolbar(bool manager, QWidget *parent);
     void setLeftContent(QWidget *content);
-    void setMiddleContent(QWidget *content);
+    void setMiddleContent(QString path);
+
+    void setTitleBarTransparent(bool a);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *e) override;
@@ -63,6 +69,7 @@ private:
     void initRightContent();
     void initMenu();
     void initWidgets();
+    QString  geteElidedText(QFont font, QString str, int MaxWidth);
 
 private slots:
 //    void onAbout();
@@ -85,16 +92,24 @@ private:
     QColor m_bottomBorderColor;
 
     QPointer<QProcess> m_manualPro;
-    QHBoxLayout *m_layout;
-    QHBoxLayout *m_lLayout;
-    QHBoxLayout *m_mLayout;
-    QHBoxLayout *m_rLayout;
+    QHBoxLayout *m_layout = nullptr;
+    QHBoxLayout *m_lLayout = nullptr;
+    QHBoxLayout *m_mLayout = nullptr;
+    QHBoxLayout *m_rLayout = nullptr;
+    DTitlebar *m_titlebar = nullptr;
+    DLabel *m_titletxt = nullptr;
+
+    DShadowLine *m_shadowLine {nullptr};
 
 #ifndef LITE_DIV
     SettingsWindow *m_settingsWindow;
 #endif
-    QMenu *m_menu;
+    DMenu *m_menu;
     bool m_manager;
+    bool m_viewChange;
+    QString m_filename = "";
+
+    QGraphicsDropShadowEffect* shadowEffect {nullptr};
 };
 
 #endif // TOPTOOLBAR_H

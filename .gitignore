@@ -22,3 +22,15 @@ include*/
 
 vendor/include/*
 vendor/lib/*
+
+.vscode/*
+
+*.log
+
+# debian
+debian/*
+!debian/changelog
+!debian/rules
+!debian/control
+!debian/compat
+!debian/source/*

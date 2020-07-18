@@ -21,6 +21,8 @@
 #include <QFutureWatcher>
 #include "controller/viewerthememanager.h"
 
+#include "imagesvgitem.h"
+
 QT_BEGIN_NAMESPACE
 class QWheelEvent;
 class QPaintEvent;
@@ -50,6 +52,7 @@ public:
 
     void clear();
     void fitWindow();
+    void fitWindow_btnclicked();
     void fitImage();
     void rotateClockWise();
     void rotateCounterclockwise();
@@ -59,10 +62,12 @@ public:
     void setScaleValue(qreal v);
 
     void autoFit();
+    void titleBarControl();
 
     const QImage image();
     qreal imageRelativeScale() const;
     qreal windowRelativeScale() const;
+    qreal windowRelativeScale_origin() const;
     const QRectF imageRect() const;
     const QString path() const;
 
@@ -82,9 +87,11 @@ signals:
     void scaled(qreal perc);
     void transformChanged();
     void showScaleLabel();
-    void hideNavigation();
+//    void hideNavigation();
     void nextRequested();
     void previousRequested();
+    void disCheckAdaptImageBtn();
+    void checkAdaptImageBtn();
 
 public slots:
     void setHighQualityAntialiasing(bool highQualityAntialiasing);
@@ -124,7 +131,11 @@ private:
     DTK_WIDGET_NAMESPACE::Toast *m_toast;
 
     QGraphicsSvgItem *m_svgItem = nullptr;
+
+    ImageSvgItem *m_imgSvgItem {nullptr};
+
     GraphicsMovieItem *m_movieItem = nullptr;
     GraphicsPixmapItem *m_pixmapItem = nullptr;
+    bool m_loadingDisplay = false;
 };
 #endif // SVGVIEW_H

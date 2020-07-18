@@ -43,7 +43,7 @@ struct MetaData {
 static MetaData MetaDatas[] = {
     {"FileName",            QT_TRANSLATE_NOOP("MetadataName", "Name")},
     {"FileFormat",          QT_TRANSLATE_NOOP("MetadataName", "Type")},
-    {"DateTimeOriginal",    QT_TRANSLATE_NOOP("MetadataName", "Date photoed")},
+    {"DateTimeOriginal",    QT_TRANSLATE_NOOP("MetadataName", "Date captured")},
     {"DateTimeDigitized",   QT_TRANSLATE_NOOP("MetadataName", "Date modified")},
     {"Dimension",           QT_TRANSLATE_NOOP("MetadataName", "Dimension")},
     {"FileSize",            QT_TRANSLATE_NOOP("MetadataName", "File size")},
@@ -70,8 +70,6 @@ ImgInfoDialog::ImgInfoDialog(const QString &path, QWidget *parent)
     setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);
     if (titlebar()) titlebar()->setFixedHeight(0);
     setFixedWidth(MAX_WIDTH);
-    setStyleSheet(utils::base::getFileContent(
-                      ":/dialogs/qss/resources/qss/imginfodialog.qss"));
 
     QWidget *w = new QWidget;
     m_layout = new QVBoxLayout(w);

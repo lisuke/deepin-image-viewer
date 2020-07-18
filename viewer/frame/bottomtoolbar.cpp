@@ -20,28 +20,41 @@
 namespace {
 const QColor DARK_COVERCOLOR = QColor(26, 26, 26, 204);
 const QColor LIGHT_COVERCOLOR = QColor(255, 255, 255, 230);
+const int BOTTOM_TOOLBAR_HEIGHT = 70;
+const int BOTTOM_TOOLBAR_WIDTH_1 = 310;
+const int BOTTOM_TOOLBAR_WIDTH_2 = 610;
 }
 
 BottomToolbar::BottomToolbar(QWidget *parent)
-    : BlurFrame(parent)
+    : DFloatingWidget(parent)
 {
-    onThemeChanged(dApp->viewerTheme->getCurrentTheme());
+//    onThemeChanged(dApp->viewerTheme->getCurrentTheme());
 
-    m_mainLayout = new QHBoxLayout(this);
-    m_mainLayout->setContentsMargins(0, 0, 0, 0);
+    DWidget *widet = new DWidget(this);
+    m_mainLayout = new QHBoxLayout(widet);
+    m_mainLayout->setContentsMargins(0, 0, 0, 1);
     m_mainLayout->setSpacing(0);
+    setWidget(widet);
+//    setRadius(18);
+//    setBlurRectYRadius(18);
+//    setBlurRectXRadius(18);
+//    setMaskAlpha(102);
+    setBlurBackgroundEnabled(true);
+    setFixedWidth(BOTTOM_TOOLBAR_WIDTH_1);
+    setFixedHeight(BOTTOM_TOOLBAR_HEIGHT);
 
-    connect(dApp->viewerTheme, &ViewerThemeManager::viewerThemeChanged, this,
-            &BottomToolbar::onThemeChanged);
+//    connect(dApp->viewerTheme, &ViewerThemeManager::viewerThemeChanged, this,
+//            &BottomToolbar::onThemeChanged);
 }
 
-void BottomToolbar::onThemeChanged(ViewerThemeManager::AppTheme theme) {
+void BottomToolbar::onThemeChanged(ViewerThemeManager::AppTheme theme)
+{
     if (theme == ViewerThemeManager::Dark) {
         m_coverBrush = DARK_COVERCOLOR;
     } else {
         m_coverBrush = LIGHT_COVERCOLOR;
     }
-    setCoverBrush(m_coverBrush);
+//    setCoverBrush(m_coverBrush);
 }
 void BottomToolbar::setContent(QWidget *content)
 {

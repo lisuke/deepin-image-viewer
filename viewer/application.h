@@ -18,37 +18,87 @@
 #define APPLICATION_H_
 
 #include <DApplication>
-
+#include <QThread>
+#include <QReadWriteLock>
+#include <QList>
 class Application;
 class ConfigSetter;
 class DatabaseManager;
 class DBManager;
 class Exporter;
 class Importer;
-class ScanPathsDialog;
 class SignalManager;
 class WallpaperSetter;
 class ViewerThemeManager;
+class QCloseEvent;
 #if defined(dApp)
 #undef dApp
 #endif
-#define dApp (static_cast<Application *>(QCoreApplication::instance()))
+#define dApp (static_cast<Application*>(QCoreApplication::instance()))
 
 DWIDGET_USE_NAMESPACE
 
-class Application : public DApplication {
+class ImageLoader : public QObject
+{
+    Q_OBJECT
+public:
+    explicit ImageLoader(Application *parent, QStringList pathlist, QString path);
+
+    void addImageLoader(QStringList pathlist);
+    void updateImageLoader(QStringList pathlist, bool bDirection);
+    //add by heyi
+    void loadInterface(QString strPath);
+
+public slots:
+    void startLoading();
+
+    //add by heyi 结束线程
+    void stopThread();
+
+signals:
+    void sigFinishiLoad(QString mapPath);
+
+private:
+    Application *m_parent;
+    QStringList m_pathlist;
+    QString m_path;
+    //add by heyi
+    volatile bool m_bFlag;
+    mutable QReadWriteLock m_readlock;
+    mutable QReadWriteLock m_writelock;
+    QList<QString> listLoad1;
+    QList<QString> listLoad2;
+};
+
+class Application : public DApplication
+{
     Q_OBJECT
 
 public:
-    Application(int& argc, char** argv);
+    Application(int &argc, char **argv);
+    ~Application();
 
     ConfigSetter *setter = nullptr;
-//    DBManager *dbM = nullptr;
-//    Exporter *exporter = nullptr;
-//    Importer *importer = nullptr;
+    //    DBManager *dbM = nullptr;
+    //    Exporter *exporter = nullptr;
+    //    Importer *importer = nullptr;
     SignalManager *signalM = nullptr;
     WallpaperSetter *wpSetter = nullptr;
     ViewerThemeManager *viewerTheme = nullptr;
+
+    QMap<QString, QPixmap> m_imagemap;
+    ImageLoader *m_imageloader;
+
+    QThread *m_LoadThread;
+signals:
+    void sigstartLoad();
+    void sigFinishLoad(QString mapPath);
+    //add by heyi
+    void endThread();
+
+public slots:
+    void finishLoadSlot(QString mapPath);
+
 private:
     void initChildren();
     void initI18n();

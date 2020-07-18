@@ -22,9 +22,12 @@
 #include "controller/viewerthememanager.h"
 
 #include <QHBoxLayout>
+#include <DWidget>
+#include <DFloatingWidget>
+#include "controller/signalmanager.h"
 
 
-class BottomToolbar : public BlurFrame
+class BottomToolbar : public DFloatingWidget
 {
     Q_OBJECT
 public:

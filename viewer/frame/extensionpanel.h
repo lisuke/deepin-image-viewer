@@ -18,27 +18,52 @@
 #ifndef EXTENSIONPANEL_H
 #define EXTENSIONPANEL_H
 
+#include <DDialog>
+#include <DFloatingWidget>
 #include <QHBoxLayout>
-#include "widgets/blureframe.h"
-#include "controller/viewerthememanager.h"
+#include <QPropertyAnimation>
+#include <QScrollArea>
+#include <DTitlebar>
+#include <QShortcut>
 
-class ExtensionPanel : public BlurFrame
+#include "controller/viewerthememanager.h"
+#include "widgets/blureframe.h"
+
+// class ExtensionPanel : public DFloatingWidget
+class ExtensionPanel : public DAbstractDialog
 {
     Q_OBJECT
 public:
-    explicit ExtensionPanel(QWidget *parent);
+    explicit ExtensionPanel(QWidget *parent = nullptr);
     void setContent(QWidget *content);
     void updateRectWithContent();
+    void moveWithAnimation(int x, int y);
+
+    void init();
+signals:
+    void requestStopAnimation();
 
 protected:
-//    void paintEvent(QPaintEvent *) override;
-    void mouseMoveEvent(QMouseEvent *e) override;
+    //    void paintEvent(QPaintEvent *) override;
+    //    void mouseMoveEvent(QMouseEvent *e) override;
+    void closeEvent(QCloseEvent *e) override;
+    void paintEvent(QPaintEvent *);
+    void mouseMoveEvent(QMouseEvent *e);
 public slots:
-    void onThemeChanged(ViewerThemeManager::AppTheme theme);
+
 private:
     QColor m_coverBrush;
     QWidget *m_content;
-    QHBoxLayout *m_contentLayout;
+    QVBoxLayout *m_contentLayout;
+
+    QVBoxLayout *m_mainLayout {nullptr};
+    QScrollArea *m_scrollArea {nullptr};
+
+    Dtk::Widget::DTitlebar *m_titleBar {nullptr};
+
+    QShortcut *m_scImageInfo{nullptr};
+    QShortcut *m_scImageInfonum{nullptr};
+    QShortcut *m_scEsc {nullptr};
 };
 
-#endif // EXTENSIONPANEL_H
+#endif  // EXTENSIONPANEL_H

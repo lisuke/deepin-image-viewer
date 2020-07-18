@@ -17,18 +17,23 @@
 #ifndef VIEWPANEL_H
 #define VIEWPANEL_H
 
-#include "module/modulepanel.h"
 #include "controller/dbmanager.h"
 #include "controller/viewerthememanager.h"
 #include "danchors.h"
-#include "thumbnailwidget.h"
 #include "lockwidget.h"
+#include "module/modulepanel.h"
+#include "thumbnailwidget.h"
 
+#include <DDesktopServices>
+#include <DFileWatcher>
+#include <DMenu>
+#include <QDirIterator>
 #include <QFileInfo>
 #include <QJsonObject>
-#include <QDirIterator>
-
+#include <QReadWriteLock>
+#include <QTimer>
 DWIDGET_USE_NAMESPACE
+DCORE_USE_NAMESPACE
 
 class ImageButton;
 class ImageInfoWidget;
@@ -37,9 +42,9 @@ class ImageWidget;
 class NavigationWidget;
 class QFileSystemWatcher;
 class QLabel;
-class QMenu;
 class QStackedWidget;
 class SlideEffectPlayer;
+class QTimer;
 
 class ViewPanel : public ModulePanel
 {
@@ -50,17 +55,30 @@ public:
     QString moduleName() Q_DECL_OVERRIDE;
     QWidget *toolbarBottomContent() Q_DECL_OVERRIDE;
     QWidget *toolbarTopLeftContent() Q_DECL_OVERRIDE;
+    QWidget *bottomTopLeftContent();
     QWidget *toolbarTopMiddleContent() Q_DECL_OVERRIDE;
     QWidget *extensionPanelContent() Q_DECL_OVERRIDE;
     const SignalManager::ViewInfo viewInfo() const;
+    int getPicCount()
+    {
+        return m_infos.count();
+    }
+    bool getPicExict()
+    {
+        return !QFileInfo(m_infos.first().filePath).exists();
+    }
 
 signals:
     void updateCollectButton();
-    void imageChanged(const QString &path);
+    void imageChanged(const QString &path, DBImgInfoList infos);
     void viewImageFrom(QString dir);
     void mouseMoved();
     void updateTopLeftWidthChanged(int width);
     void updateTopLeftContentImage(const QString &path);
+    void updatePath();
+    //heyi test
+    void sendLoadOver();
+    void changeHideFlag(bool bFlags);
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) Q_DECL_OVERRIDE;
@@ -88,20 +106,22 @@ private:
     void initNavigation();
 
     // Menu control
-    void appendAction(int id, const QString &text, const QString &shortcut="");
+    void appendAction(int id, const QString &text, const QString &shortcut = "");
 #ifndef LITE_DIV
-    QMenu* createAlbumMenu();
+    DMenu *createAlbumMenu();
 #endif
     void onMenuItemClicked(QAction *action);
+    //更新右键菜单
     void updateMenuContent();
 
     // View control
     void onViewImage(const SignalManager::ViewInfo &vinfo);
-    void openImage(const QString& path, bool inDB = true);
+    void openImage(const QString &path, bool inDB = true);
     void removeCurrentImage();
     void rotateImage(bool clockWise);
     bool showNext();
     bool showPrevious();
+    bool showImage(int index, int addIndex);
 
     // Geometry
     void toggleFullScreen();
@@ -115,11 +135,15 @@ private:
     QFileInfoList getFileInfos(const QString &path);
     DBImgInfoList getImageInfos(const QFileInfoList &infos);
     const QStringList paths() const;
+    void startFileWatcher();
 
 private slots:
     void onThemeChanged(ViewerThemeManager::AppTheme theme);
 
     void updateLocalImages();
+
+    //heyi test  发送显示缩略图的信号
+    void sendSignal();
 
 private:
     int m_hideCursorTid;
@@ -129,23 +153,39 @@ private:
     bool m_printDialogVisible = false;
     int m_topLeftContentWidth = 0;
     ImageView *m_viewB;
-    ImageInfoWidget *m_info;
-    ThumbnailWidget* m_emptyWidget=nullptr;
-    QMenu *m_menu;
-    QStackedWidget *m_stack;
-    LockWidget* m_lockWidget;
+    ImageInfoWidget *m_info {nullptr};
+    ThumbnailWidget *m_emptyWidget = nullptr;
+    DMenu *m_menu;
+    QStackedWidget *m_stack {nullptr};
+    LockWidget *m_lockWidget;
 
     // Floating component
     DAnchors<NavigationWidget> m_nav;
 
     SignalManager::ViewInfo m_vinfo;
     DBImgInfoList m_infos;
-    DBImgInfoList::ConstIterator m_current;
+    //heyi test
+    DBImgInfoList m_infosFirst;
+    //    DBImgInfoList::ConstIterator m_current =NULL;
+    int m_current = 0;
 #ifdef LITE_DIV
     QScopedPointer<QDirIterator> m_imageDirIterator;
 
     void eatImageDirIterator();
 #endif
     QString m_currentImageLastDir = "";
+    QString m_currentImagePath = "";
+    DFileWatcher *m_fileManager;
+    QString m_currentFilePath = "";
+    bool m_finish = false;
+
+    QScrollArea *m_scrollArea {nullptr};
+
+    int          m_fileNum = 0;
+    QTimer       m_timer;
+    QReadWriteLock m_rwLock;
+    volatile bool m_bIsFirstLoad = true;
+    //第一次开机是否加载完成
+    volatile bool m_bFinishFirstLoad = false;
 };
-#endif // VIEWPANEL_H
+#endif  // VIEWPANEL_H

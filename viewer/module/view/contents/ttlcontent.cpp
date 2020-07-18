@@ -89,8 +89,8 @@ TTLContent::TTLContent(bool inDB,
     m_adaptImageBtn->setFixedSize(ICON_SIZE);
 
     m_adaptImageBtn->setToolTip(tr("1:1 Size"));
-    hb->addWidget(m_adaptImageBtn);
-    hb->addSpacing(ICON_SPACING);
+//    hb->addWidget(m_adaptImageBtn);
+//    hb->addSpacing(ICON_SPACING);
     connect(m_adaptImageBtn, &PushButton::clicked, this, [=] {
         emit resetTransform(false);
     });
@@ -99,8 +99,8 @@ TTLContent::TTLContent(bool inDB,
     m_adaptScreenBtn->setFixedSize(ICON_SIZE);
     m_adaptScreenBtn->setObjectName("AdaptScreenBtn");
     m_adaptScreenBtn->setToolTip(tr("Fit to window"));
-    hb->addWidget(m_adaptScreenBtn);
-    hb->addSpacing(ICON_SPACING);
+//    hb->addWidget(m_adaptScreenBtn);
+//    hb->addSpacing(ICON_SPACING);
     connect(m_adaptScreenBtn, &PushButton::clicked, this, [=] {
         emit resetTransform(true);
     });
@@ -129,8 +129,8 @@ TTLContent::TTLContent(bool inDB,
     m_rotateLBtn->setFixedSize(ICON_SIZE);
     m_rotateLBtn->setObjectName("RotateBtn");
     m_rotateLBtn->setToolTip(tr("Rotate counterclockwise"));
-    hb->addWidget(m_rotateLBtn);
-    hb->addSpacing(ICON_SPACING);
+//    hb->addWidget(m_rotateLBtn);
+//    hb->addSpacing(ICON_SPACING);
     connect(m_rotateLBtn, &PushButton::clicked,
             this, &TTLContent::rotateCounterClockwise);
 
@@ -138,8 +138,8 @@ TTLContent::TTLContent(bool inDB,
     m_rotateRBtn->setFixedSize(ICON_SIZE);
     m_rotateRBtn->setObjectName("RotateCounterBtn");
     m_rotateRBtn->setToolTip(tr("Rotate clockwise"));
-    hb->addWidget(m_rotateRBtn);
-    hb->addSpacing(ICON_SPACING);
+//    hb->addWidget(m_rotateRBtn);
+//    hb->addSpacing(ICON_SPACING);
     connect(m_rotateRBtn, &PushButton::clicked,
             this, &TTLContent::rotateClockwise);
 
@@ -147,9 +147,10 @@ TTLContent::TTLContent(bool inDB,
     m_trashBtn->setFixedSize(ICON_SIZE);
     m_trashBtn->setObjectName("TrashBtn");
     m_trashBtn->setToolTip(tr("Delete"));
-    hb->addWidget(m_trashBtn);
+//    hb->addWidget(m_trashBtn);
 
     m_fileNameLabel = new ElidedLabel();
+    m_fileNameLabel->setAlignment(Qt::Alignment::enum_type::AlignCenter);
     hb->addWidget(m_fileNameLabel);
     connect(m_trashBtn, &PushButton::clicked, this, &TTLContent::removed);
     connect(dApp->viewerTheme, &ViewerThemeManager::viewerThemeChanged, this,
@@ -203,7 +204,7 @@ void TTLContent::updateFilenameLayout()
                               - m_leftContentWidth - LEFT_MARGIN - 2);
     } else {
         leftMargin = std::max(0, (m_windowWidth - strWidth)/2
-                              - m_leftContentWidth - 6);
+                              );
         name = filename;
     }
 
@@ -211,13 +212,7 @@ void TTLContent::updateFilenameLayout()
 }
 
 void TTLContent::onThemeChanged(ViewerThemeManager::AppTheme theme) {
-    if (theme == ViewerThemeManager::Dark) {
-        this->setStyleSheet(utils::base::getFileContent(
-                                ":/resources/dark/qss/ttl.qss"));
-    } else {
-        this->setStyleSheet(utils::base::getFileContent(
-                                ":/resources/light/qss/ttl.qss"));
-    }
+
 }
 
 void TTLContent::setCurrentDir(QString text) {
@@ -237,7 +232,7 @@ void TTLContent::resizeEvent(QResizeEvent *event)
     m_contentWidth = std::max(m_windowWidth - 100, 1);
 }
 
-void TTLContent::setImage(const QString &path)
+void TTLContent::setImage(const QString &path,DBImgInfoList infos)
 {
     m_imagePath = path;
     if (path.isEmpty() || !QFileInfo(path).exists()
